@@ -16,30 +16,65 @@
 
 <body>
     <div id="app">
-
         <div class="header">
-            <mu-appbar color="lightBlue400">
-                <mu-button icon slot="left">
-                    <mu-icon value="menu"></mu-icon>
-                </mu-button>
-                Contacts
-                <mu-button icon slot="right">
-                    <mu-icon value="search"></mu-icon>
-                </mu-button>
+            <mu-appbar color="#42a5f5" class="header-content">
+                <div slot="left">
+                    登录页面
+                </div>
+
+                <div slot="right" class="nav-right">
+                    <span style="margin-right: 10px;">注册</span>
+                    <span style="margin-right: 10px;">联系方式</span>
+                    <!-- <mu-menu open-on-hover>
+                        <div color="primary">用户管理</div>
+                        <mu-list slot="content">
+                            <mu-list-item button>
+                                <mu-list-item-title>权限管理</mu-list-item-title>
+                            </mu-list-item>
+                            <mu-list-item button>
+                                <mu-list-item-title>角色管理</mu-list-item-title>
+                            </mu-list-item>
+                            <mu-list-item button>
+                                <mu-list-item-title>用户管理</mu-list-item-title>
+                            </mu-list-item>
+                        </mu-list>
+                    </mu-menu> -->
+                </div>
             </mu-appbar>
         </div>
 
-        <div class="body">
+        <mu-container class="body">
 
-        </div>
+            <div class="body-header">
+                登录
+            </div>
 
-    </div>
+            <mu-form ref="form" class="mu-demo-form">
+                <mu-form-item label="用户名">
+                    <mu-text-field prop="username"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="密码" prop="password">
+                    <mu-text-field type="password"></mu-text-field>
+                </mu-form-item>
+                <!-- <mu-form-item prop="isAgree">
+                    <mu-checkbox label="同意用户协议"></mu-checkbox>
+                </mu-form-item> -->
+                <mu-form-item>
+                    <mu-button color="primary">提交</mu-button>
+                    <div>
+                        <a href="#">
+                            忘记密码
+                        </a>
+                    </div>
+                </mu-form-item>
+            </mu-form>
+        </mu-container>
 
-    <script src="./js/vue.js"></script>
-    <script src="/js/muse-ui.js"></script>
-    <script>
-        new Vue().$mount('#app')
-    </script>
+        <script src="./js/vue.js"></script>
+        <script src="/js/muse-ui.js"></script>
+        <script>
+            new Vue().$mount('#app')
+        </script>
 
 </body>
 
