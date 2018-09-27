@@ -12,15 +12,6 @@
     <link href="./css/muse-ui.css" rel="stylesheet" />
     <link href="./css/material-icons.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
-
-    <style>
-        .body{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
 </head>
 
 <body>
@@ -52,31 +43,7 @@
             </mu-appbar>
         </div>
 
-        <mu-container class="body">
-            <div class="body-header">
-                登录
-            </div>
 
-            <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="120">
-                <mu-form-item label="用户名">
-                    <mu-text-field prop="username"></mu-text-field>
-                </mu-form-item>
-                <mu-form-item label="密码" prop="password">
-                    <mu-text-field type="password"></mu-text-field>
-                </mu-form-item>
-                <!-- <mu-form-item prop="isAgree">
-                    <mu-checkbox label="同意用户协议"></mu-checkbox>
-                </mu-form-item> -->
-                <mu-form-item>
-                    <mu-button color="primary">提交</mu-button>
-                    <div>
-                        <a href="#">
-                            忘记密码
-                        </a>
-                    </div>
-                </mu-form-item>
-            </mu-form>
-        </mu-container>
 
         <script src="./js/vue.js"></script>
         <script src="./js/muse-ui.js"></script>
