@@ -1,0 +1,170 @@
+<!-- 公司注册 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册页面</title>
+
+    <link href="./css/reset.css" rel="stylesheet" />
+    <link href="./css/muse-ui.css" rel="stylesheet" />
+    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        .picture{
+            height: 200px;            
+            padding: 30px !important;
+        }
+
+        .upload-container{
+            height: 100%;
+            line-height: 140px;
+            text-align: center;
+            border: 4px dotted #efefef;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <mu-appbar color="#42a5f5" class="header-content">
+                <div slot="left">
+                    公司注册
+                </div>
+
+                <div slot="right" class="nav-right">
+                    <span style="margin-right: 10px;">注册</span>
+                    <span style="margin-right: 10px;">联系方式</span>
+                </div>
+            </mu-appbar>
+        </div>
+
+        <mu-container class="body">
+
+            <div class="body-header">
+                公司注册
+            </div>
+
+            <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="120">
+                <mu-form-item label="用户名">
+                    <mu-text-field prop="username"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="密码" prop="password">
+                    <mu-text-field type="password"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="公司名称">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="银行账号">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="开户银行名称">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="开户银行地址">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="公司地址">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="联系人">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+
+                <mu-form-item label="联系人手机">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+
+                <mu-form-item label="联系人邮箱">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+
+                <mu-row>
+                    <mu-col span="12" class="picture">
+                        <div class="upload-container">
+                            公司营业执照
+                        </div>
+                    </mu-col>
+                </mu-row>
+                <mu-row>
+                    <mu-col span="6" class="picture">
+                        <div class="upload-container">
+                            法人个人照片
+                        </div>
+                    </mu-col>
+                    <mu-col span="6" class="picture">
+                        <div class="upload-container">
+                            法人身份证照片
+                        </div>
+                    </mu-col>
+                </mu-row>
+
+                <mu-flex justify-content="end">
+                    <mu-button color="primary">注册</mu-button>
+                </mu-flex>
+            </mu-form>
+        </mu-container>
+
+        <script src="./js/vue.js"></script>
+        <script src="./js/muse-ui.js"></script>
+        <script>
+            new Vue().$mount('#app')
+        </script>
+</body>
+
+</html>" prop="password">
+<mu-text-field></mu-text-field>
+</mu-form-item>
+<mu-form-item label="银行名称" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+<mu-form-item label="银行地址" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+<mu-form-item label="开户名" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+<mu-form-item label="住址" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+<mu-form-item label="固定电话" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+
+<mu-form-item label="移动电话" prop="password">
+    <mu-text-field></mu-text-field>
+</mu-form-item>
+
+<mu-row>
+    <mu-col span="6" class="picture">
+        <div class="upload-container">
+            个人照片
+        </div>
+    </mu-col>
+    <mu-col span="6" class="picture">
+        <div class="upload-container">
+            身份证照片
+        </div>
+    </mu-col>
+</mu-row>
+
+<mu-flex justify-content="end">
+    <mu-button color="primary">注册</mu-button>
+</mu-flex>
+</mu-form>
+</mu-container>
+
+<script src="./js/vue.js"></script>
+<script src="./js/muse-ui.js"></script>
+<script>
+    new Vue().$mount('#app')
+</script>
+</body>
+
+</html>
