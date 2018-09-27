@@ -24,13 +24,13 @@ body {
 }
 
 .body{
-    margin-top: 66px;
+    margin-top: 20px;
     background-color: white;
     padding: 20px;
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
 .body .body-header{
