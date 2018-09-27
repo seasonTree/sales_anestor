@@ -12,6 +12,22 @@
     <link href="./css/muse-ui.css" rel="stylesheet" />
     <link href="./css/material-icons.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        .picture{
+            height: 200px;            
+            padding: 30px !important;
+        }
+
+        .upload-container{
+            height: 100%;
+            line-height: 140px;
+            text-align: center;
+            border: 4px dotted #efefef;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -45,21 +61,42 @@
                 <mu-form-item label="银行账号" prop="password">
                     <mu-text-field></mu-text-field>
                 </mu-form-item>
-                <mu-form-item label="密码" prop="password">
+                <mu-form-item label="银行名称" prop="password">
                     <mu-text-field></mu-text-field>
                 </mu-form-item>
-                <mu-form-item label="密码" prop="password">
+                <mu-form-item label="银行地址" prop="password">
                     <mu-text-field></mu-text-field>
                 </mu-form-item>
-                <mu-form-item label="密码" prop="password">
+                <mu-form-item label="开户名" prop="password">
                     <mu-text-field></mu-text-field>
                 </mu-form-item>
-                <mu-form-item label="密码" prop="password">
+                <mu-form-item label="住址" prop="password">
                     <mu-text-field></mu-text-field>
                 </mu-form-item>
-                <mu-form-item>
-                    <mu-button color="primary">提交</mu-button>
+                <mu-form-item label="固定电话" prop="password">
+                    <mu-text-field></mu-text-field>
                 </mu-form-item>
+
+                <mu-form-item label="移动电话" prop="password">
+                    <mu-text-field></mu-text-field>
+                </mu-form-item>
+
+                <mu-row>
+                    <mu-col span="6" class="picture">
+                        <div class="upload-container">
+                            个人照片
+                        </div>
+                    </mu-col>
+                    <mu-col span="6" class="picture">
+                        <div class="upload-container">
+                            身份证照片
+                        </div>
+                    </mu-col>
+                </mu-row>
+
+                <mu-flex justify-content="end">
+                    <mu-button color="primary">注册</mu-button>
+                </mu-flex>
             </mu-form>
         </mu-container>
 
@@ -68,7 +105,5 @@
         <script>
             new Vue().$mount('#app')
         </script>
-
 </body>
-
 </html>
