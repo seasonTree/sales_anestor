@@ -53,3 +53,7 @@ body {
 .table-content table {
     width: auto !important;
 }
+
+.mu-input{
+    width: 100%;
+}

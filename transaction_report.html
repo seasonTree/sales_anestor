@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transaction History</title>
+
+    <link href="./css/reset.css" rel="stylesheet" />
+    <link href="./css/muse-ui.css" rel="stylesheet" />
+    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/common.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <mu-appbar color="#42a5f5" class="header-content">
+                <div slot="left">
+                    Transaction History
+                </div>
+
+                <div slot="right" class="nav-right">
+                    <span style="margin-right: 10px;">注册</span>
+                    <span style="margin-right: 10px;">联系方式</span>
+                    <!-- <mu-menu open-on-hover>
+                                <div color="primary">系统信息</div>
+                                <mu-list slot="content">
+                                    <mu-list-item button>
+        
+                                        <mu-menu open-on-hover placement="left">
+                                            <div>
+                                                销售网络
+                                            </div>
+                                            <mu-list slot="content">
+                                                <mu-list-item button>fdsa</mu-list-item>
+                                            </mu-list>
+                                        </mu-menu>
+        
+                                    </mu-list-item>
+                                </mu-list>
+                            </mu-menu> -->
+                </div>
+            </mu-appbar>
+        </div>
+
+        <mu-container class="body">
+            <div class="body-header">
+                Transaction History
+            </div>
+
+            <!-- 搜索 -->
+            <!-- <mu-row gutter>
+                <mu-col span="2">
+                    <mu-text-field placeholder="名字"></mu-text-field>
+                </mu-col>
+
+                <mu-col span="2">
+                    <mu-text-field placeholder="姓" type="password"></mu-text-field>
+                </mu-col>
+
+                <mu-col span="4">
+                    <mu-text-field placeholder="用户名"></mu-text-field>
+                </mu-col>
+
+                <mu-col span="2">
+                    <mu-text-field placeholder="渠道名"></mu-text-field>
+                </mu-col>
+
+                <mu-col span="2">
+                    <mu-button color="primary">
+                        <mu-icon left value="search"></mu-icon>
+                        搜索
+                    </mu-button>
+                </mu-col>
+
+            </mu-row> -->
+
+            <mu-data-table border :columns="columns" :data="list" class="table-content">
+                <template slot-scope="scope">
+                    <td>{{scope.row.id}}</td>
+                    <td class="is-right">{{scope.row.name}}</td>
+                    <td class="is-right">{{scope.row.role}}</td>
+                    <td class="is-right">{{scope.row.active}}</td>
+                    <td class="is-right">{{scope.row.active}}</td>
+                </template>
+            </mu-data-table>
+
+            <mu-flex justify-content="center" style="margin-top: 10px;">
+                <mu-pagination raised circle total="100" current.sync="1"></mu-pagination>
+            </mu-flex>
+
+            <div style="text-align:right;">
+                <mu-button color="primary">Export Excel</mu-button>
+            </div>
+
+        </mu-container>
+
+        <script src="./js/vue.js"></script>
+        <script src="/js/muse-ui.js"></script>
+        <script>
+            new Vue({
+                data() {
+                    return {
+                        openSimple: false,
+
+                        columns: [{
+                                title: 'Firt Name',
+                                name: '渠道名'
+                            },
+                            {
+                                title: 'Phone',
+                                name: 'name',
+                                align: 'center',
+                            },
+                            {
+                                title: 'Amount',
+                                name: 'role',
+                                align: 'center',
+                            },
+                            {
+                                title: 'Usage',
+                                name: 'active',
+                                align: 'center',
+                            },
+                            {
+                                title: 'Date',
+                                name: 'uu',
+                                align: 'center',
+                            }
+                        ],
+                        list: [{
+                            id: 'Test',
+                            name: '+86 987XXX321',
+                            role: 'T00001',
+                            active: '30',
+                            uu: '2018-08-15'
+                        }, ]
+                    };
+                }
+            }).$mount('#app')
+        </script>
+
+
+</body>
+
+</html>
