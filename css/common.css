@@ -49,3 +49,7 @@ body {
     /* top: 50%;
     transform: translate(0, -50%); */
 }
+
+.table-content table {
+    width: auto !important;
+}
