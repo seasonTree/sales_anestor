@@ -1,0 +1,172 @@
+<!-- 权限管理 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>权限管理</title>
+
+    <link href="./css/reset.css" rel="stylesheet" />
+    <link href="./css/muse-ui.css" rel="stylesheet" />
+    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        .btn-frame {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="app">
+    <div class="header">
+        <mu-appbar color="#42a5f5" class="header-content">
+            <div slot="left">
+                权限管理
+            </div>
+
+            <div slot="right" class="nav-right">
+                <span style="margin-right: 10px;">注册</span>
+                <span style="margin-right: 10px;">联系方式</span>
+                <!-- <mu-menu open-on-hover>
+                    <div color="primary">系统信息</div>
+                    <mu-list slot="content">
+                        <mu-list-item button>
+
+                            <mu-menu open-on-hover placement="left">
+                                <div>
+                                    权限管理
+                                </div>
+                                <mu-list slot="content">
+                                    <mu-list-item button>fdsa</mu-list-item>
+                                </mu-list>
+                            </mu-menu>
+
+                        </mu-list-item>
+                    </mu-list>
+                </mu-menu> -->
+            </div>
+        </mu-appbar>
+    </div>
+
+    <mu-container class="body">
+        <div class="body-header">
+            权限管理
+        </div>
+
+        <div class="btn-frame">
+            <mu-button color="primary" @click="openSimpleDialog">新增权限</mu-button>
+        </div>
+
+        <!-- <mu-paper :z-depth="1"> -->
+        <mu-data-table border :columns="columns" :data="list" class="table-content">
+            <template slot-scope="scope">
+                <td>{{scope.row.id}}</td>
+                <td class="is-right">{{scope.row.pri_name}}</td>
+                <td class="is-right">{{scope.row.fields}}</td>
+                <!--<td class="is-right">{{scope.row.active}}</td>-->
+                <td class="is-center">
+                    <mu-button small fab>
+                        <mu-icon value="edit"></mu-icon>
+                    </mu-button>
+                    <mu-button small fab>
+                        <mu-icon value="delete_forever"></mu-icon>
+                    </mu-button>
+                </td>
+            </template>
+        </mu-data-table>
+        <!-- </mu-paper> -->
+
+        <mu-dialog title="权限新增" width="360" :open.sync="openSimple">
+            <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="80">
+                <mu-form-item label="上级权限">
+                    <mu-text-field prop="parent_id">下拉框</mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="权限名称">
+                    <mu-text-field prop="pri_name"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="模块">
+                    <mu-text-field prop="module_name"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="控制器">
+                    <mu-text-field prop="controller_name"></mu-text-field>
+                </mu-form-item>
+                <mu-form-item label="方法">
+                    <mu-text-field prop="action_name"></mu-text-field>
+                </mu-form-item>
+            </mu-form>
+
+            <mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">确定</mu-button>
+            <mu-button slot="actions" flat @click="closeSimpleDialog">关闭</mu-button>
+        </mu-dialog>
+
+    </mu-container>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/muse-ui.js"></script>
+    <script>
+        new Vue({
+            data() {
+                return {
+                    openSimple: false,
+
+                    columns: [{
+                        title: 'ID',
+                        name: 'id'
+                    },
+                        {
+                            title: '权限名称',
+                            name: 'pri_name',
+                            align: 'center',
+                        },
+                        {
+                            title: '字段名',
+                            name: 'fields',
+                            align: 'center',
+                        },
+                        // {
+                        //     title: '是否启用',
+                        //     name: 'active',
+                        //     align: 'center',
+                        // },
+                        {
+                            title: '操作',
+                            name: 'active',
+                            align: 'center',
+                        }
+                    ],
+                    list: [
+                        {
+                            id: '1',
+                            pri_name: '会员管理',
+                            fields: '',
+
+                        },
+                        {
+                            id: '2',
+                            pri_name: '会员列表',
+                            fields: 'admin user memberlist',
+
+                        },
+                    ]
+                };
+            },
+
+            methods: {
+                openSimpleDialog() {
+                    this.openSimple = true;
+                },
+                closeSimpleDialog() {
+                    this.openSimple = false;
+                }
+            }
+        }).$mount('#app')
+    </script>
+
+</body>
+
+</html>
