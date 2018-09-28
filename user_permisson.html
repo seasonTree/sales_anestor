@@ -107,72 +107,73 @@
             </mu-dialog>
 
         </mu-container>
+    </div>
 
-        <script src="./js/vue.js"></script>
-        <script src="./js/muse-ui.js"></script>
-        <script>
-            new Vue({
-                data() {
-                    return {
-                        openSimple: false,
+    <script src="./js/vue.js"></script>
+    <script src="./js/muse-ui.js"></script>
+    <script>
+        new Vue({
+            data() {
+                return {
+                    openSimple: false,
 
-                        selectVal: '',
+                    selectVal: '',
 
-                        options: [
-                            '用户页面', '系统页面'
-                        ],
+                    options: [
+                        '用户页面', '系统页面'
+                    ],
 
-                        columns: [{
-                                title: 'ID',
-                                name: 'id'
-                            },
-                            {
-                                title: '权限名称',
-                                name: 'pri_name',
-                                align: 'center',
-                            },
-                            {
-                                title: '字段名',
-                                name: 'fields',
-                                align: 'center',
-                            },
-                            // {
-                            //     title: '是否启用',
-                            //     name: 'active',
-                            //     align: 'center',
-                            // },
-                            {
-                                title: '操作',
-                                name: 'active',
-                                align: 'center',
-                            }
-                        ],
-                        list: [{
-                                id: '1',
-                                pri_name: '会员管理',
-                                fields: '',
+                    columns: [{
+                            title: 'ID',
+                            name: 'id'
+                        },
+                        {
+                            title: '权限名称',
+                            name: 'pri_name',
+                            align: 'center',
+                        },
+                        {
+                            title: '字段名',
+                            name: 'fields',
+                            align: 'center',
+                        },
+                        // {
+                        //     title: '是否启用',
+                        //     name: 'active',
+                        //     align: 'center',
+                        // },
+                        {
+                            title: '操作',
+                            name: 'active',
+                            align: 'center',
+                        }
+                    ],
+                    list: [{
+                            id: '1',
+                            pri_name: '会员管理',
+                            fields: '',
 
-                            },
-                            {
-                                id: '2',
-                                pri_name: '会员列表',
-                                fields: 'admin user memberlist',
+                        },
+                        {
+                            id: '2',
+                            pri_name: '会员列表',
+                            fields: 'admin user memberlist',
 
-                            },
-                        ]
-                    };
+                        },
+                    ]
+                };
+            },
+
+            methods: {
+                openSimpleDialog() {
+                    this.openSimple = true;
                 },
-
-                methods: {
-                    openSimpleDialog() {
-                        this.openSimple = true;
-                    },
-                    closeSimpleDialog() {
-                        this.openSimple = false;
-                    }
+                closeSimpleDialog() {
+                    this.openSimple = false;
                 }
-            }).$mount('#app')
-        </script>
+            }
+        }).$mount('#app')
+    </script>
 
 </body>
 

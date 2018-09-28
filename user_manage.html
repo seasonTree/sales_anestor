@@ -99,59 +99,61 @@
             </mu-dialog>
 
         </mu-container>
+    </div>
 
-        <script src="./js/vue.js"></script>
-        <script src="/js/muse-ui.js"></script>
-        <script>
-            new Vue({
-                data() {
-                    return {
-                        openSimple: false,
 
-                        columns: [{
-                                title: 'ID',
-                                name: 'id'
-                            },
-                            {
-                                title: '登录名',
-                                name: 'name',
-                                align: 'center',
-                            },
-                            {
-                                title: '角色',
-                                name: 'role',
-                                align: 'center',
-                            },
-                            {
-                                title: '是否启用',
-                                name: 'active',
-                                align: 'center',
-                            },
-                            {
-                                title: '操作',
-                                name: 'active',
-                                align: 'center',
-                            }
-                        ],
-                        list: [{
-                            id: '1',
-                            name: 'admin',
-                            role: '管理员',
-                            active: '是',
-                        }, ]
-                    };
+    <script src="./js/vue.js"></script>
+    <script src="/js/muse-ui.js"></script>
+    <script>
+        new Vue({
+            data() {
+                return {
+                    openSimple: false,
+
+                    columns: [{
+                            title: 'ID',
+                            name: 'id'
+                        },
+                        {
+                            title: '登录名',
+                            name: 'name',
+                            align: 'center',
+                        },
+                        {
+                            title: '角色',
+                            name: 'role',
+                            align: 'center',
+                        },
+                        {
+                            title: '是否启用',
+                            name: 'active',
+                            align: 'center',
+                        },
+                        {
+                            title: '操作',
+                            name: 'active',
+                            align: 'center',
+                        }
+                    ],
+                    list: [{
+                        id: '1',
+                        name: 'admin',
+                        role: '管理员',
+                        active: '是',
+                    }, ]
+                };
+            },
+
+            methods: {
+                openSimpleDialog() {
+                    this.openSimple = true;
                 },
-
-                methods: {
-                    openSimpleDialog() {
-                        this.openSimple = true;
-                    },
-                    closeSimpleDialog() {
-                        this.openSimple = false;
-                    }
+                closeSimpleDialog() {
+                    this.openSimple = false;
                 }
-            }).$mount('#app')
-        </script>
+            }
+        }).$mount('#app')
+    </script>
 
 </body>
 

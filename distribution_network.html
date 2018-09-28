@@ -8,135 +8,118 @@
     <title>销售网络</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
-    <link href="./css/muse-ui.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
 
 </head>
 
 <body>
-    <div id="app">
+    <v-app id="app">
         <div class="header">
-            <mu-appbar color="#42a5f5" class="header-content">
-                <div slot="left">
-                    销售网络
-                </div>
+            <v-toolbar>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>销售网络</v-toolbar-title>
+                <v-spacer></v-spacer>
 
-                <div slot="right" class="nav-right">
-                    <span style="margin-right: 10px;">注册</span>
-                    <span style="margin-right: 10px;">联系方式</span>
-                    <!-- <mu-menu open-on-hover>
-                                <div color="primary">系统信息</div>
-                                <mu-list slot="content">
-                                    <mu-list-item button>
-        
-                                        <mu-menu open-on-hover placement="left">
-                                            <div>
-                                                销售网络
-                                            </div>
-                                            <mu-list slot="content">
-                                                <mu-list-item button>fdsa</mu-list-item>
-                                            </mu-list>
-                                        </mu-menu>
-        
-                                    </mu-list-item>
-                                </mu-list>
-                            </mu-menu> -->
-                </div>
-            </mu-appbar>
+                <!-- TODO -->
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>注册</v-btn>
+                    <v-btn flat>联系方式</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
         </div>
 
-        <mu-container class="body">
+        <v-container class="body" grid-list-md>
             <div class="body-header">
                 销售网络
             </div>
 
-            <!-- 搜索 -->
-            <mu-row gutter>
-                <mu-col span="2">
-                    <mu-text-field placeholder="名字"></mu-text-field>
-                </mu-col>
+            <v-layout row wrap>
+                <v-flex xs2>
+                    <v-text-field label="名字"></v-text-field>
+                </v-flex>
 
-                <mu-col span="2">
-                    <mu-text-field placeholder="姓" type="password"></mu-text-field>
-                </mu-col>
+                <v-flex xs2>
+                    <v-text-field label="姓"></v-text-field>
+                </v-flex>
+                <v-flex xs4>
+                    <v-text-field label="用户名"></v-text-field>
+                </v-flex>
+                <v-flex xs2>
+                    <v-text-field label="渠道名"></v-text-field>
+                </v-flex>
+                <v-flex xs2>
+                    <v-btn color="s-primary">
+                        <v-icon dark>search</v-icon>搜索
+                    </v-btn>
+                </v-flex>
+            </v-layout>
 
-                <mu-col span="4">
-                    <mu-text-field placeholder="用户名"></mu-text-field>
-                </mu-col>
 
-                <mu-col span="2">
-                    <mu-text-field placeholder="渠道名"></mu-text-field>
-                </mu-col>
-
-                <mu-col span="2">
-                    <mu-button color="primary">
-                        <mu-icon left value="search"></mu-icon>
-                        搜索
-                    </mu-button>
-                </mu-col>
-
-            </mu-row>
-
-            <mu-data-table border :columns="columns" :data="list" class="table-content">
-                <template slot-scope="scope">
-                    <td>{{scope.row.id}}</td>
-                    <td class="is-right">{{scope.row.name}}</td>
-                    <td class="is-right">{{scope.row.role}}</td>
-                    <td class="is-right">{{scope.row.active}}</td>
-                    <td class="is-right">{{scope.row.active}}</td>
+            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                <template slot="items" slot-scope="props">
+                    <td class="text-xs-left">{{ props.item.a }}</td>
+                    <td class="text-xs-left">{{ props.item.b }}</td>
+                    <td class="text-xs-left">{{ props.item.c }}</td>
+                    <td class="text-xs-left">{{ props.item.d }}</td>
+                    <td class="text-xs-left">{{ props.item.e }}</td>
                 </template>
-            </mu-data-table>
+            </v-data-table>
+        </v-container>
+    </v-app>
 
-        </mu-container>
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
 
-        <script src="./js/vue.js"></script>
-        <script src="/js/muse-ui.js"></script>
-        <script>
-            new Vue({
-                data() {
-                    return {
-                        openSimple: false,
+            data() {
+                return {
 
-                        columns: [{
-                                title: 'ID',
-                                name: '渠道名'
-                            },
-                            {
-                                title: '名字',
-                                name: 'name',
-                                align: 'center',
-                            },
-                            {
-                                title: '姓',
-                                name: 'role',
-                                align: 'center',
-                            },
-                            {
-                                title: '用户名',
-                                name: 'active',
-                                align: 'center',
-                            },
-                            {
-                                title: '注册日期',
-                                name: 'active',
-                                align: 'center',
-                            }
-                        ],
-                        list: [
-                            //     {
-                            //     id: '1',
-                            //     name: 'admin',
-                            //     role: '管理员',
-                            //     active: '是',
-                            // }, 
-                        ]
-                    };
-                }
-            }).$mount('#app')
-        </script>
-
-
+                    theader: [{
+                            text: '渠道名',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '名字',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '姓',
+                            align: 'left',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '用户名',
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            text: '注册日期',
+                            align: 'left',
+                            value: 'e',
+                            sortable: false,
+                        },
+                    ],
+                    tdata: [{
+                        a: '123',
+                        b: '111111',
+                        c: '111111',
+                        d: '111111',
+                        e: '111111',
+                    }]
+                };
+            }
+        })
+    </script>
 </body>
 
 </html>

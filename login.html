@@ -9,80 +9,68 @@
     <title>登录页面</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
-    <link href="./css/muse-ui.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .body{
+        .body {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            max-width: 600px;
+        }
+
+        .s-primary{
+            margin: 10px 0;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
-    <div id="app">
+    <v-app id="app">
         <div class="header">
-            <mu-appbar color="#42a5f5" class="header-content">
-                <div slot="left">
-                    登录页面
-                </div>
-
-                <div slot="right" class="nav-right">
-                    <span style="margin-right: 10px;">注册</span>
-                    <span style="margin-right: 10px;">联系方式</span>
-                    <!-- <mu-menu open-on-hover>
-                        <div color="primary">用户管理</div>
-                        <mu-list slot="content">
-                            <mu-list-item button>
-                                <mu-list-item-title>权限管理</mu-list-item-title>
-                            </mu-list-item>
-                            <mu-list-item button>
-                                <mu-list-item-title>角色管理</mu-list-item-title>
-                            </mu-list-item>
-                            <mu-list-item button>
-                                <mu-list-item-title>用户管理</mu-list-item-title>
-                            </mu-list-item>
-                        </mu-list>
-                    </mu-menu> -->
-                </div>
-            </mu-appbar>
+            <v-toolbar>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>登录页面</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>注册</v-btn>
+                    <v-btn flat>联系方式</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
         </div>
 
-        <mu-container class="body">
+        <v-container class="body" grid-list-md>
             <div class="body-header">
-                登录
+                KOOA - Sales Management System
             </div>
 
-            <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="120">
-                <mu-form-item label="用户名">
-                    <mu-text-field prop="username"></mu-text-field>
-                </mu-form-item>
-                <mu-form-item label="密码" prop="password">
-                    <mu-text-field type="password"></mu-text-field>
-                </mu-form-item>
-                <!-- <mu-form-item prop="isAgree">
-                    <mu-checkbox label="同意用户协议"></mu-checkbox>
-                </mu-form-item> -->
-                <mu-form-item>
-                    <mu-button color="primary">提交</mu-button>
-                    <div>
-                        <a href="#">
-                            忘记密码
-                        </a>
-                    </div>
-                </mu-form-item>
-            </mu-form>
-        </mu-container>
+            <v-form>
+                <v-text-field label="用户名"></v-text-field>
+                <v-text-field label="密码" type="password"></v-text-field>
+                <v-btn class="s-primary">登录</v-btn>
 
-        <script src="./js/vue.js"></script>
-        <script src="./js/muse-ui.js"></script>
-        <script>
-            new Vue().$mount('#app')
-        </script>
+                <div>
+                    忘记用户名或密码 
+                    <a href="#">
+                        点击找回密码
+                    </a>
+                </div>
+            </v-form>
+
+        </v-container>
+    </v-app>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app'
+        });
+    </script>
 
 </body>
 

@@ -14,46 +14,47 @@ body {
     line-height: 1.8;
 }
 
-.header .header-content{
-    padding: 0 10px;
-}
-
-.header,
-.header .nav-right > div {
-    line-height: 60px;
-}
-
-.body{
+.body {
     margin-top: 20px;
     background-color: white;
     padding: 20px;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
+    max-width: 900px;
+    border-radius: 10px;
 }
 
-.body .body-header{
+.body .body-header {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: 600;
     color: #677897;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-.body .content{
-    max-width: 1024px;
-    margin: 0 auto;
-    background: white;
-    position: relative;
-    /* top: 50%;
-    transform: translate(0, -50%); */
+/***********/
+.s-primary {
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
 }
 
-.table-content table {
-    width: auto !important;
+.theme--light.v-toolbar{
+    color: white;
+    background-color: #42a5f5;
 }
 
-.mu-input{
-    width: 100%;
+
+.theme--light.application {
+    background: inherit;
+}
+
+.theme--light.v-btn {
+    color: white;
+}
+
+.v-toolbar__title {
+    color: white;
+}
+
+.s-table{
+    margin: 10px 0;
 }

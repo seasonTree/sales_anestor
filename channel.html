@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>渠道</title>
+
+    <link href="./css/reset.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        /* .body table thead{
+            display: none;
+        } */
+    </style>
+
+</head>
+<div id="app">
+    <div class="header">
+        <mu-appbar color="#42a5f5" class="header-content">
+            <div slot="left">
+                Transaction History
+            </div>
+
+            <div slot="right" class="nav-right">
+                <span style="margin-right: 10px;">注册</span>
+                <span style="margin-right: 10px;">联系方式</span>
+                <!-- <mu-menu open-on-hover>
+                                <div color="primary">系统信息</div>
+                                <mu-list slot="content">
+                                    <mu-list-item button>
+        
+                                        <mu-menu open-on-hover placement="left">
+                                            <div>
+                                                销售网络
+                                            </div>
+                                            <mu-list slot="content">
+                                                <mu-list-item button>fdsa</mu-list-item>
+                                            </mu-list>
+                                        </mu-menu>
+        
+                                    </mu-list-item>
+                                </mu-list>
+                            </mu-menu> -->
+            </div>
+        </mu-appbar>
+    </div>
+
+    <mu-container class="body">
+        <div class="body-header">
+            渠道
+        </div>
+
+        <mu-data-table :columns="columns" hideHeader="true" :data="list" class="table-content">
+            <template slot-scope="scope">
+                <td>{{scope.row.id}}</td>
+                <td class="is-right">{{scope.row.name}}</td>
+                <td class="is-right">{{scope.row.role}}</td>
+                <td class="is-right">{{scope.row.active}}</td>
+                <td class="is-right">{{scope.row.active}}</td>
+            </template>
+        </mu-data-table>
+
+        <!-- <mu-flex justify-content="center" style="margin-top: 10px;">
+            <mu-pagination raised circle total="100" current.sync="1"></mu-pagination>
+        </mu-flex> -->
+
+        <!-- <div style="text-align:right;">
+            <mu-button color="primary">Export Excel</mu-button>
+        </div> -->
+
+    </mu-container>
+</div>
+
+
+<script src="./js/vue.js"></script>
+<!-- <script src="/js/muse-ui.js"></script> -->
+<script src="/js/vuetify.js"></script>
+<script>
+    // Vue.use(Vuetify, {
+    //     theme: {
+    //         primary: "#2196F3",
+    //         secondary: "#4FC3F7",
+    //         accent: "#2196F3",
+    //         error: "#f44336",
+    //         warning: "#F9A825",
+    //         info: "#2196f3",
+    //         success: "#4caf50"
+    //     }
+    // })
+
+    new Vue({
+        data() {
+            return {
+                openSimple: false,
+
+                columns: [{
+                        name: 'id'
+                    },
+                    {
+                        name: 'name',
+                        align: 'center',
+                    },
+                    {
+                        name: 'role',
+                        align: 'center',
+                    },
+                    {
+                        name: 'active',
+                        align: 'center',
+                    },
+                    {
+                        name: 'uu',
+                        align: 'center',
+                    }
+                ],
+                list: [{
+                    id: 'Test',
+                    name: '+86 987XXX321',
+                    role: 'T00001',
+                    active: '30',
+                    uu: '2018-08-15'
+                }, ]
+            };
+        }
+    }).$mount('#app')
+</script>
+</body>
+
+</html>
