@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>个人注册页面</title>
+    <title>开通账号</title>
 
     <link href="./css/vuetify.min.css" rel="stylesheet" />
     <link href="./css/css.css" rel="stylesheet" />
@@ -40,7 +40,7 @@
         <div class="header">
             <v-toolbar color="#42a5f5">
                 <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>个人注册页面</v-toolbar-title>
+                <v-toolbar-title>开通帐号</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items class="hidden-sm-and-down">
                     <v-btn flat>注册</v-btn>
@@ -51,7 +51,7 @@
 
         <v-container class="body" grid-list-md>
             <div class="body-header">
-                个人注册页面
+                开通账号
             </div>
 
             <v-form>
@@ -83,34 +83,11 @@
                         </div>
                     </v-flex>
                 </v-layout>
-                <div class="protocol">
-                    <a href="javascript:void(0)" @click="dialog = true">＜同意xxx协议＞</a>
-                </div>
 
-                <v-btn color="s-primary">注册</v-btn>
+                <v-btn color="s-primary">开通账号</v-btn>
             </v-form>
         </v-container>
 
-        <v-dialog v-model="dialog" width="500">
-            <v-card>
-                <v-card-title class="headline grey lighten-2" primary-title>
-                    法律条文
-                </v-card-title>
-
-                <v-card-text>
-                    法律条文
-                </v-card-text>
-
-                <v-divider></v-divider>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="dialog = false">
-                        我同意
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
     </v-app>
 
 
