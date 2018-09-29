@@ -49,9 +49,46 @@
                 </v-toolbar>
             </div>
 
-            <v-container class="body" grid-list-md>
-                <div class="body-header">
-                    公司注册
+            <v-form>
+                <v-text-field label="用户名"></v-text-field>
+                <v-text-field label="密码" 
+                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                    :type="show_pass ? 'text' : 'password'"
+                    @click:append="show_pass = !show_pass"
+                ></v-text-field>
+                <v-text-field label="姓"></v-text-field>
+                <v-text-field label="名字"></v-text-field>
+                <v-text-field label="公司名称"></v-text-field>
+                <v-text-field label="银行账号"></v-text-field>
+                <v-text-field label="开户银行名称"></v-text-field>
+                <v-text-field label="开户银行地址"></v-text-field>
+                <v-text-field label="公司地址"></v-text-field>
+                <v-text-field label="联系人"></v-text-field>
+                <v-text-field label="联系人手机"></v-text-field>
+                <v-text-field label="联系人邮箱"></v-text-field>
+
+                <v-layout row wrap>
+                    <v-flex xs4>
+                        <div class="upload-container">
+                            公司营业执照
+                        </div>
+                    </v-flex>
+
+                    <v-flex xs4>
+                        <div class="upload-container">
+                            法人个人照片
+                        </div>
+                    </v-flex>
+
+                    <v-flex xs4>
+                        <div class="upload-container">
+                            法人身份证照片
+                        </div>
+                    </v-flex>
+                </v-layout>
+
+                <div class="protocol">
+                    <a href="javascript:void(0)" @click="dialog = true">＜同意xxx协议＞</a>
                 </div>
 
                 <v-form>

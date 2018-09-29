@@ -1,4 +1,3 @@
-<!-- 登录页面 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,50 +5,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>登录页面</title>
+    <title>Team</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
-    <link href="./css/muse-ui.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        .export{
+            text-align: right;
+        }
+
+        .export .s-primary{
+            margin-right: 0;
+        }
+    </style>
+
 </head>
 
 <body>
-    <div id="app">
-        <div class="header">
-            <mu-appbar color="#42a5f5" class="header-content">
-                <div slot="left">
-                    登录页面
-                </div>
+    <v-app id="app">
 
-                <div slot="right" class="nav-right">
-                    <span style="margin-right: 10px;">注册</span>
-                    <span style="margin-right: 10px;">联系方式</span>
-                    <!-- <mu-menu open-on-hover>
-                        <div color="primary">用户管理</div>
-                        <mu-list slot="content">
-                            <mu-list-item button>
-                                <mu-list-item-title>权限管理</mu-list-item-title>
-                            </mu-list-item>
-                            <mu-list-item button>
-                                <mu-list-item-title>角色管理</mu-list-item-title>
-                            </mu-list-item>
-                            <mu-list-item button>
-                                <mu-list-item-title>用户管理</mu-list-item-title>
-                            </mu-list-item>
-                        </mu-list>
-                    </mu-menu> -->
-                </div>
-            </mu-appbar>
+        <div class="header">
+            <v-toolbar>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>Team</v-toolbar-title>
+                <v-spacer></v-spacer>
+
+                <!-- TODO -->
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>注册</v-btn>
+                    <v-btn flat>联系方式</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
         </div>
 
+        <v-container class="body" grid-list-md>
+            <div class="body-header">
+                Team
+            </div>
 
 
-        <script src="./js/vue.js"></script>
-        <script src="./js/muse-ui.js"></script>
-        <script>
-            new Vue().$mount('#app')
-        </script>
+            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                <template slot="items" slot-scope="props">
+                    <td class="text-xs-left">{{ props.item.a }}</td>
+                    <td class="text-xs-left">{{ props.item.b }}</td>
+                    <td class="text-xs-right">{{ props.item.c }}</td>
+                    <td class="text-xs-left">{{ props.item.d }}</td>
+                    <td class="text-xs-left">{{ props.item.e }}</td>
+                    <td class="text-xs-left">{{ props.item.f }}</td>
+                </template>
+            </v-data-table>
+
+            <div class="">
+                    <v-btn color="s-primary">添加</v-btn>
+                    
+            </div>
+            
+        </v-container>
+    </v-app>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+
+            data() {
+                return {
+
+                    theader: [{
+                            text: '姓名',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '电话',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '负责/关联渠道',
+                            align: 'right',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '业绩目标',
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            text: '医生目标',
+                            align: 'left',
+                            value: 'e',
+                            sortable: false,
+                        },
+                        {
+                            text: '设置',
+                            align: 'left',
+                            value: 'f',
+                            sortable: false,
+                        },
+                    ],
+                    tdata:[
+                    {
+                        a: '王成',
+                        b: '187563245',
+                        c: '微信1(大众点评)',
+                        d: '50000',
+                        e: '10000',
+                        f: '',
+                    },
+                    {
+                        a: '李成功',
+                        b: '1821503112',
+                        c: '医生合作',
+                        d: '50000',
+                        e: '10000',
+                        f: '',
+                    }
+                    ]
+                };
+            }
+        })
+    </script>
+
 
 </body>
 
