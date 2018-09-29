@@ -13,7 +13,7 @@
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .upload-container{
+        .upload-container {
             height: 100%;
             line-height: 140px;
             text-align: center;
@@ -21,12 +21,12 @@
             cursor: pointer;
         }
 
-        .s-primary{
+        .s-primary {
             margin: 10px 0;
             width: 100%;
         }
 
-        .protocol{
+        .protocol {
             text-align: center;
             margin-top: 10px;
         }
@@ -35,81 +35,80 @@
 </head>
 
 <body>
-    <v-app id="app">
+    <div id="app">
+        <v-app>
 
-        <div class="header">
-            <v-toolbar color="#42a5f5">
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>个人注册页面</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items class="hidden-sm-and-down">
-                    <v-btn flat>注册</v-btn>
-                    <v-btn flat>联系方式</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-        </div>
-
-        <v-container class="body" grid-list-md>
-            <div class="body-header">
-                个人注册页面
+            <div class="header">
+                <v-toolbar color="#42a5f5">
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>个人注册页面</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
-            <v-form>
-                <v-text-field label="用户名"></v-text-field>
-                <v-text-field label="密码" 
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    :type="show_pass ? 'text' : 'password'"
-                    @click:append="show_pass = !show_pass"
-                ></v-text-field>
-                <v-text-field label="银行账号"></v-text-field>
-                <v-text-field label="银行名称"></v-text-field>
-                <v-text-field label="银行地址"></v-text-field>
-                <v-text-field label="开户名"></v-text-field>
-                <v-text-field label="固定电话"></v-text-field>
-                <v-text-field label="移动电话"></v-text-field>
-
-                <v-layout row wrap>
-                    <v-flex xs6>
-                        <div class="upload-container">
-                            个人照片
-                        </div>
-                    </v-flex>
-
-                    <v-flex xs6>
-                        <div class="upload-container">
-                            身份证照片
-                        </div>
-                    </v-flex>
-                </v-layout>
-                <div class="protocol">
-                    <a href="javascript:void(0)" @click="dialog = true">＜同意xxx协议＞</a>
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    个人注册页面
                 </div>
 
-                <v-btn color="s-primary">注册</v-btn>
-            </v-form>
-        </v-container>
+                <v-form>
+                    <v-text-field label="用户名"></v-text-field>
+                    <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'" :type="show_pass ? 'text' : 'password'"
+                        @click:append="show_pass = !show_pass"></v-text-field>
+                    <v-text-field label="银行账号"></v-text-field>
+                    <v-text-field label="银行名称"></v-text-field>
+                    <v-text-field label="银行地址"></v-text-field>
+                    <v-text-field label="开户名"></v-text-field>
+                    <v-text-field label="固定电话"></v-text-field>
+                    <v-text-field label="移动电话"></v-text-field>
 
-        <v-dialog v-model="dialog" width="500">
-            <v-card>
-                <v-card-title class="headline grey lighten-2" primary-title>
-                    法律条文
-                </v-card-title>
+                    <v-layout row wrap>
+                        <v-flex xs6>
+                            <div class="upload-container">
+                                个人照片
+                            </div>
+                        </v-flex>
 
-                <v-card-text>
-                    法律条文
-                </v-card-text>
+                        <v-flex xs6>
+                            <div class="upload-container">
+                                身份证照片
+                            </div>
+                        </v-flex>
+                    </v-layout>
+                    <div class="protocol">
+                        <a href="javascript:void(0)" @click="dialog = true">＜同意xxx协议＞</a>
+                    </div>
 
-                <v-divider></v-divider>
+                    <v-btn color="s-primary">注册</v-btn>
+                </v-form>
+            </v-container>
 
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="dialog = false">
-                        我同意
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-    </v-app>
+            <v-dialog v-model="dialog" width="500">
+                <v-card>
+                    <v-card-title class="headline grey lighten-2" primary-title>
+                        法律条文
+                    </v-card-title>
+
+                    <v-card-text>
+                        法律条文
+                    </v-card-text>
+
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" flat @click="dialog = false">
+                            我同意
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-app>
+    </div>
 
 
     <script src="./js/vue.js"></script>
@@ -118,7 +117,7 @@
         new Vue({
             el: '#app',
 
-            data(){
+            data() {
                 return {
                     show_pass: false,
                     dialog: false

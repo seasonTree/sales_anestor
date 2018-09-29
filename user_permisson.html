@@ -16,82 +16,84 @@
 </head>
 
 <body>
-    <v-app id="app">
-        <div class="header">
-            <v-toolbar>
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>权限管理</v-toolbar-title>
-                <v-spacer></v-spacer>
+    <div id="app">
+        <v-app>
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>权限管理</v-toolbar-title>
+                    <v-spacer></v-spacer>
 
-                <!-- TODO -->
-                <v-toolbar-items class="hidden-sm-and-down">
-                    <v-btn flat>注册</v-btn>
-                    <v-btn flat>联系方式</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-        </div>
-
-
-        <v-container class="body" grid-list-md>
-            <div class="body-header">
-                权限管理
-            </div>
-
-            <div class="action-bar">
-                <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
-                    <v-icon dark>add</v-icon>新增
-                </v-btn>
+                    <!-- TODO -->
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
 
-            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
-                <template slot="items" slot-scope="props">
-                    <td class="text-xs-left">{{ props.item.a }}</td>
-                    <td class="text-xs-left">{{ props.item.b }}</td>
-                    <td class="text-xs-right">{{ props.item.c }}</td>
-                    <td class="text-xs-center">
-                        <v-icon small class="mr-2">
-                            edit
-                        </v-icon>
-                        <v-icon small>
-                            delete
-                        </v-icon>
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    权限管理
+                </div>
 
-                    </td>
-                </template>
-            </v-data-table>
+                <div class="action-bar">
+                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                        <v-icon dark>add</v-icon>新增
+                    </v-btn>
+                </div>
 
-            <v-dialog v-model="showAdd" width="500">
-                <v-card>
-                    <v-card-title class="headline grey lighten-2" primary-title>
-                        新增
-                    </v-card-title>
 
-                    <v-card-text>
-                        <v-form>
-                            <v-select :items="items" label="上级权限"></v-select>
-                            <v-text-field label="权限名称"></v-text-field>
-                            <v-text-field label="模块"></v-text-field>
-                            <v-text-field label="控制器"></v-text-field>
-                            <v-text-field label="方法"></v-text-field>
-                        </v-form>
-                    </v-card-text>
+                <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                    <template slot="items" slot-scope="props">
+                        <td class="text-xs-left">{{ props.item.a }}</td>
+                        <td class="text-xs-left">{{ props.item.b }}</td>
+                        <td class="text-xs-right">{{ props.item.c }}</td>
+                        <td class="text-xs-center">
+                            <v-icon small class="mr-2">
+                                edit
+                            </v-icon>
+                            <v-icon small>
+                                delete
+                            </v-icon>
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="s-primary" @click="showAdd = false">
-                            确认
-                        </v-btn>
-                        <v-btn color="primary" flat @click="showAdd = false">
-                            取消
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+                        </td>
+                    </template>
+                </v-data-table>
 
-        </v-container>
+                <v-dialog v-model="showAdd" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增
+                        </v-card-title>
 
-    </v-app>
+                        <v-card-text>
+                            <v-form>
+                                <v-select :items="items" label="上级权限"></v-select>
+                                <v-text-field label="权限名称"></v-text-field>
+                                <v-text-field label="模块"></v-text-field>
+                                <v-text-field label="控制器"></v-text-field>
+                                <v-text-field label="方法"></v-text-field>
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAdd = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAdd = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+            </v-container>
+
+        </v-app>
+    </div>
 
     <script src="./js/vue.js"></script>
     <script src="./js/vuetify.js"></script>
@@ -140,142 +142,6 @@
             }
         })
     </script>
-
-
-    <!-- <div id="app">
-        <div class="header">
-            <mu-appbar color="#42a5f5" class="header-content">
-                <div slot="left">
-                    权限管理
-                </div>
-
-                <div slot="right" class="nav-right">
-                    <span style="margin-right: 10px;">注册</span>
-                    <span style="margin-right: 10px;">联系方式</span>
-                </div>
-            </mu-appbar>
-        </div>
-
-        <mu-container class="body">
-            <div class="body-header">
-                权限管理
-            </div>
-
-            <div class="btn-frame">
-                <mu-button color="primary" @click="openSimpleDialog">新增权限</mu-button>
-            </div>
-
-            <mu-data-table border :columns="columns" :data="list" class="table-content">
-                <template slot-scope="scope">
-                    <td>{{scope.row.id}}</td>
-                    <td class="is-right">{{scope.row.pri_name}}</td>
-                    <td class="is-right">{{scope.row.fields}}</td>
-                    <td class="is-center">
-                        <mu-button small fab>
-                            <mu-icon value="edit"></mu-icon>
-                        </mu-button>
-                        <mu-button small fab>
-                            <mu-icon value="delete_forever"></mu-icon>
-                        </mu-button>
-                    </td>
-                </template>
-            </mu-data-table>
-
-            <mu-dialog title="权限新增" width="420" :open.sync="openSimple">
-                <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="80">
-                    <mu-form-item label="上级权限">
-                        <mu-select v-model="selectVal" full-width>
-                            <mu-option v-for="option,index in options" :key="option" :label="option" :value="option"></mu-option>
-                        </mu-select>
-                    </mu-form-item>
-                    <mu-form-item label="权限名称">
-                        <mu-text-field prop="pri_name"></mu-text-field>
-                    </mu-form-item>
-                    <mu-form-item label="模块">
-                        <mu-text-field prop="module_name"></mu-text-field>
-                    </mu-form-item>
-                    <mu-form-item label="控制器">
-                        <mu-text-field prop="controller_name"></mu-text-field>
-                    </mu-form-item>
-                    <mu-form-item label="方法">
-                        <mu-text-field prop="action_name"></mu-text-field>
-                    </mu-form-item>
-                </mu-form>
-
-                <mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">确定</mu-button>
-                <mu-button slot="actions" flat @click="closeSimpleDialog">关闭</mu-button>
-            </mu-dialog>
-
-        </mu-container>
-    </div>
-
-    <script src="./js/vue.js"></script>
-    <script src="./js/muse-ui.js"></script>
-    <script>
-        new Vue({
-            data() {
-                return {
-                    openSimple: false,
-
-                    selectVal: '',
-
-                    options: [
-                        '用户页面', '系统页面'
-                    ],
-
-                    columns: [{
-                            title: 'ID',
-                            name: 'id'
-                        },
-                        {
-                            title: '权限名称',
-                            name: 'pri_name',
-                            align: 'center',
-                        },
-                        {
-                            title: '字段名',
-                            name: 'fields',
-                            align: 'center',
-                        },
-                        // {
-                        //     title: '是否启用',
-                        //     name: 'active',
-                        //     align: 'center',
-                        // },
-                        {
-                            title: '操作',
-                            name: 'active',
-                            align: 'center',
-                        }
-                    ],
-                    list: [{
-                            id: '1',
-                            pri_name: '会员管理',
-                            fields: '',
-
-                        },
-                        {
-                            id: '2',
-                            pri_name: '会员列表',
-                            fields: 'admin user memberlist',
-
-                        },
-                    ]
-                };
-            },
-
-            methods: {
-                openSimpleDialog() {
-                    this.openSimple = true;
-                },
-                closeSimpleDialog() {
-                    this.openSimple = false;
-                }
-            }
-        }).$mount('#app')
-    </script>
-
-     -->
 
 </body>
 

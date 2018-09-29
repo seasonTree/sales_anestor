@@ -16,82 +16,83 @@
 </head>
 
 <body>
+    <div id="app">
+        <v-app id="app">
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>用户管理</v-toolbar-title>
+                    <v-spacer></v-spacer>
 
-    <v-app id="app">
-        <div class="header">
-            <v-toolbar>
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>用户管理</v-toolbar-title>
-                <v-spacer></v-spacer>
-
-                <!-- TODO -->
-                <v-toolbar-items class="hidden-sm-and-down">
-                    <v-btn flat>注册</v-btn>
-                    <v-btn flat>联系方式</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-        </div>
-
-        <v-container class="body" grid-list-md>
-            <div class="body-header">
-                用户管理
+                    <!-- TODO -->
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
-            <div class="action-bar">
-                <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
-                    <v-icon dark>add</v-icon>新增
-                </v-btn>
-            </div>
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    用户管理
+                </div>
+
+                <div class="action-bar">
+                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                        <v-icon dark>add</v-icon>新增
+                    </v-btn>
+                </div>
 
 
-            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
-                <template slot="items" slot-scope="props">
-                    <td class="text-xs-left">{{ props.item.a }}</td>
-                    <td class="text-xs-left">{{ props.item.b }}</td>
-                    <td class="text-xs-right">{{ props.item.c }}</td>
-                    <td class="text-xs-left">{{ props.item.d }}</td>
-                    <td class="text-xs-center">
-                        <v-icon small class="mr-2">
-                            edit
-                        </v-icon>
-                        <v-icon small>
-                            delete
-                        </v-icon>
+                <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                    <template slot="items" slot-scope="props">
+                        <td class="text-xs-left">{{ props.item.a }}</td>
+                        <td class="text-xs-left">{{ props.item.b }}</td>
+                        <td class="text-xs-right">{{ props.item.c }}</td>
+                        <td class="text-xs-left">{{ props.item.d }}</td>
+                        <td class="text-xs-center">
+                            <v-icon small class="mr-2">
+                                edit
+                            </v-icon>
+                            <v-icon small>
+                                delete
+                            </v-icon>
 
-                    </td>
-                </template>
-            </v-data-table>
+                        </td>
+                    </template>
+                </v-data-table>
 
-            <v-dialog v-model="showAdd" width="500">
-                <v-card>
-                    <v-card-title class="headline grey lighten-2" primary-title>
-                        新增
-                    </v-card-title>
+                <v-dialog v-model="showAdd" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增
+                        </v-card-title>
 
-                    <v-card-text>
-                        <v-form>
-                            <v-text-field label="用户名"></v-text-field>
-                            <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'" :type="show_pass ? 'text' : 'password'"
-                                @click:append="show_pass = !show_pass"></v-text-field>
-                            <v-text-field label="确认密码" :append-icon="show_pass1 ? 'visibility_off' : 'visibility'"
-                                :type="show_pass1 ? 'text' : 'password'" @click:append="show_pass1 = !show_pass1"></v-text-field>
-                        </v-form>
-                    </v-card-text>
+                        <v-card-text>
+                            <v-form>
+                                <v-text-field label="用户名"></v-text-field>
+                                <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                                    :type="show_pass ? 'text' : 'password'" @click:append="show_pass = !show_pass"></v-text-field>
+                                <v-text-field label="确认密码" :append-icon="show_pass1 ? 'visibility_off' : 'visibility'"
+                                    :type="show_pass1 ? 'text' : 'password'" @click:append="show_pass1 = !show_pass1"></v-text-field>
+                            </v-form>
+                        </v-card-text>
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="s-primary" @click="showAdd = false">
-                            确认
-                        </v-btn>
-                        <v-btn color="primary" flat @click="showAdd = false">
-                            取消
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAdd = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAdd = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
 
-        </v-container>
-    </v-app>
+            </v-container>
+        </v-app>
+    </div>
 
     <script src="./js/vue.js"></script>
     <script src="./js/vuetify.js"></script>

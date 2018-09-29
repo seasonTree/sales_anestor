@@ -15,49 +15,51 @@
 </head>
 
 <body>
-    <v-app id="app">
+    <div id="app">
+        <v-app>
 
-        <div class="header">
-            <v-toolbar>
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>Transaction History</v-toolbar-title>
-                <v-spacer></v-spacer>
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>Transaction History</v-toolbar-title>
+                    <v-spacer></v-spacer>
 
-                <!-- TODO -->
-                <v-toolbar-items class="hidden-sm-and-down">
-                    <v-btn flat>注册</v-btn>
-                    <v-btn flat>联系方式</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-        </div>
-
-        <v-container class="body" grid-list-md>
-            <div class="body-header">
-                Transaction History
+                    <!-- TODO -->
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    Transaction History
+                </div>
 
-            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
-                <template slot="items" slot-scope="props">
-                    <td class="text-xs-left">{{ props.item.a }}</td>
-                    <td class="text-xs-left">{{ props.item.b }}</td>
-                    <td class="text-xs-right">{{ props.item.c }}</td>
-                    <td class="text-xs-left">{{ props.item.d }}</td>
-                    <td class="text-xs-left">{{ props.item.e }}</td>
-                </template>
-            </v-data-table>
 
-            <div class="text-md-center">
-                <v-pagination length="4" class="pager" v-model="pageIdx"></v-pagination>
-            </div>
+                <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                    <template slot="items" slot-scope="props">
+                        <td class="text-xs-left">{{ props.item.a }}</td>
+                        <td class="text-xs-left">{{ props.item.b }}</td>
+                        <td class="text-xs-right">{{ props.item.c }}</td>
+                        <td class="text-xs-left">{{ props.item.d }}</td>
+                        <td class="text-xs-left">{{ props.item.e }}</td>
+                    </template>
+                </v-data-table>
 
-            <div class="text-md-right">
-                <v-btn color="s-primary" class="mr-0">Export Excel</v-btn>
-            </div>
+                <div class="text-md-center">
+                    <v-pagination length="4" class="pager" v-model="pageIdx"></v-pagination>
+                </div>
 
-        </v-container>
+                <div class="text-md-right">
+                    <v-btn color="s-primary" class="mr-0">Export Excel</v-btn>
+                </div>
 
-    </v-app>
+            </v-container>
+
+        </v-app>
+    </div>
 
     <script src="./js/vue.js"></script>
     <script src="./js/vuetify.js"></script>

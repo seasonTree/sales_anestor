@@ -10,104 +10,486 @@
 
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/vuetify.min.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
 
+    <style>
+        .main-table-sub {
+            color: #c5c4c4;
+            border: 1px solid #e3e3e3;
+            padding: 4px;
+            margin: 6px 0;
+            /* text-align: center; */
+        }
 
+        .qr-container {
+            padding: 4px;
+            margin: 4px 0;
+        }
+
+        .qrcode-image {
+            min-height: 80px;
+            min-width: 80px;
+            height: 100%;
+            width: 100%;
+            border: 1px solid #e3e3e3;
+            border-radius: 6px;
+        }
+
+        .download-qrcode {
+            color: #2196f3;
+            border-color: #2196f3;
+            border-radius: 6px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+
+        .download-qrcode:hover {
+            color: white;
+            background-color: #2196f3;
+        }
+
+        .table-sub-number {
+            color: #8BC34A;
+        }
+
+        .sub-item {
+            padding: 10px 0;
+        }
+
+        .line {
+            height: 1px;
+            background-color: #e3e3e3;
+            width: 100%;
+        }
+
+        /* .sub-item:last-of-type .line{
+            display: none;
+        } */
+
+        .sub-item div {
+            display: inline-block;
+        }
+
+        .sub-right {
+            float: right;
+        }
+
+        .clearfix:after {
+            display: block;
+            content: '';
+            clear: both;
+            height: 0;
+        }
+
+        .sub-right .sub-right-item,
+        .sub-left {
+            padding: 0 24px;
+        }
+    </style>
 
 </head>
-<div id="app">
-    <div class="header">
-        <mu-appbar color="#42a5f5" class="header-content">
-            <div slot="left">
-                Transaction History
+
+<body>
+    <div id="app">
+        <v-app>
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>渠道</v-toolbar-title>
+                    <v-spacer></v-spacer>
+
+                    <!-- TODO -->
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
-            <div slot="right" class="nav-right">
-                <span style="margin-right: 10px;">注册</span>
-                <span style="margin-right: 10px;">联系方式</span>
-                <!-- <mu-menu open-on-hover>
-                                <div color="primary">系统信息</div>
-                                <mu-list slot="content">
-                                    <mu-list-item button>
-        
-                                        <mu-menu open-on-hover placement="left">
-                                            <div>
-                                                销售网络
+
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    渠道
+                </div>
+
+                <div class="action-bar">
+                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                        <v-icon dark>add</v-icon>新增渠道
+                    </v-btn>
+                </div>
+
+                <v-layout v-resize="onTabelResize">
+                    <v-data-table :headers="theader" :items="tdata" hide-headers hide-actions item-key="a" expand class="elevation-1 s-table"
+                        ref="dTable">
+
+                        <template slot="items" slot-scope="props">
+                            <tr @click="props.expanded = !props.expanded">
+                                <td class="text-xs-left" ref="td1">
+                                    {{ props.item.a }}
+                                </td>
+                                <td class="text-xs-left">
+                                    {{ props.item.b }}
+                                    <div class="main-table-sub">
+                                        {{ props.item.a_1 }}
+                                    </div>
+                                </td>
+                                <td class="text-xs-left">
+                                    <div class="qr-container">
+                                        <v-img src="./images/webwxgetmsgimg.jpeg" class="qrcode-image" contain>
+                                    </div>
+                                </td>
+                                <td class="text-xs-left">
+                                    {{ props.item.d }}
+                                    <div class="main-table-sub">
+                                        {{ props.item.d_1 }}
+                                    </div>
+                                </td>
+                                <td class="text-xs-left" ref="td2">
+                                    {{ props.item.e }}
+                                    <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
+                                </td>
+                                <td class="text-xs-right">
+                                    {{ props.item.f }}
+                                    <div class="table-sub-number">
+                                        {{ props.item.f_1 }}
+                                    </div>
+                                </td>
+                                <td class="text-xs-right">
+                                    {{ props.item.g }}
+                                    <div class="table-sub-number">
+                                        {{ props.item.g_1 }}
+                                    </div>
+                                </td>
+                                <td class="text-xs-center" ref="td5">
+                                    <v-icon v-if="props.item.stop" class="mr-2" color="red" title="停止">
+                                        block
+                                    </v-icon>
+
+                                    <v-icon v-if="!props.item.stop" class="mr-2" color="light-green" title="开始">
+                                        lens
+                                    </v-icon>
+                                </td>
+                            </tr>
+                        </template>
+
+                        <!-- flex 可以去掉inline-block的间隙 -->
+                        <template slot="expand" slot-scope="props">
+                            <div v-for="(subItem, subIdx) in props.item.children" :key="subIdx" class="sub-item clearfix"
+                                :style="subSytle">
+                                <div class="sub-left">
+                                    <span>{{subItem.sub_id}}</span>
+                                    <span>{{subItem.sub_name}}</span>
+                                </div>
+                                <div class="sub-right">
+                                    <v-layout row wrap>
+                                        <div class="text-xs-left sub-right-item ellipsis" :style="subUrlWidth">
+                                            <span :title="subItem.url">{{ subItem.url }}</span>
+                                            <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
+                                        </div>
+                                        <div class="text-xs-right sub-right-item">
+                                            <p>
+                                                {{ subItem.f }}
+                                            </p>
+
+                                            <div class="table-sub-number">
+                                                {{ subItem.f_1 }}
                                             </div>
-                                            <mu-list slot="content">
-                                                <mu-list-item button>fdsa</mu-list-item>
-                                            </mu-list>
-                                        </mu-menu>
-        
-                                    </mu-list-item>
-                                </mu-list>
-                            </mu-menu> -->
-            </div>
-        </mu-appbar>
+                                        </div>
+
+                                        <div class="text-xs-right sub-right-item">
+                                            <p>
+                                                {{ subItem.g }}
+                                            </p>
+                                            <div class="table-sub-number">
+                                                {{ subItem.g_1 }}
+                                            </div>
+                                        </div>
+                                    </v-layout>
+                                </div>
+
+                                <div class="line"></div>
+                            </div>
+
+                            <div :style="subSytle">
+                                <v-btn color="s-primary" ml="0" @click="showAddSales = true">
+                                    <v-icon dark>add</v-icon>新增销售员
+                                </v-btn>
+                            </div>
+                        </template>
+                    </v-data-table>
+                </v-layout>
+
+                <v-dialog v-model="showAdd" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-form>
+                                <v-text-field label="渠道名称"></v-text-field>
+                                <v-text-field label="描述信息"></v-text-field>
+                                <v-text-field label="二维码附加信息"></v-text-field>
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAdd = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAdd = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <v-dialog v-model="showAddSales" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增销售员
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-form>
+                                <v-combobox v-model="chips" :items="saliesLists" label="请选择销售员" chips clearable
+                                    prepend-icon="filter_list" solo multiple>
+                                    <template slot="selection" slot-scope="data">
+                                        <v-chip :selected="data.selected" close @input="remove(data)">
+                                            <strong>{{ data.item }}</strong>&nbsp;
+                                        </v-chip>
+                                    </template>
+                                </v-combobox>
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAddSales = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAddSales = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+            </v-container>
+
+        </v-app>
     </div>
 
-    <mu-container class="body">
-        <div class="body-header">
-            渠道
-        </div>
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
 
-        <mu-data-table :columns="columns" hideHeader="true" :data="list" class="table-content">
-            <template slot-scope="scope">
-                <td>{{scope.row.id}}</td>
-                <td class="is-right">{{scope.row.name}}</td>
-                <td class="is-right">{{scope.row.role}}</td>
-                <td class="is-right">{{scope.row.active}}</td>
-                <td class="is-right">{{scope.row.active}}</td>
-            </template>
-        </mu-data-table>
+            mounted() {
+                for (let i = 0; i < this.tdata.length; i += 1) {
+                    const item = this.tdata[i];
+                    this.$set(this.$refs.dTable.expanded, item.a, true)
+                }
 
-    </mu-container>
-</div>
+                var that = this;
 
+                setTimeout(function () {
+                    that.calcWidth();
+                }, 100);
+            },
 
-<script src="./js/vue.js"></script>
-<!-- <script src="/js/muse-ui.js"></script> -->
-<script src="/js/vuetify.js"></script>
-<script>
+            methods: {
+                onTabelResize() {
+                    this.calcWidth();
+                },
 
+                calcWidth() {
+                    var td1Width = this.$refs.td1.offsetWidth,
+                        td2Width = this.$refs.td2.offsetWidth,
+                        td5Width = this.$refs.td5.offsetWidth,
+                        left = td1Width,
+                        right = td5Width;
 
-    new Vue({
-        data() {
-            return {
-                openSimple: false,
+                    this.subUrlWidth['width'] = td2Width + 'px';
+                    this.subSytle['paddingLeft'] = left + 'px';
+                    this.subSytle['paddingRight'] = right + 'px';
+                },
 
-                columns: [{
-                        name: 'id'
+                remove(item) {
+                    this.chips.splice(this.chips.indexOf(item), 1)
+                    this.chips = [...this.chips]
+                }
+            },
+
+            data() {
+                return {
+                    subSytle: {
+                        paddingLeft: '0px',
+                        paddingRight: '0px'
                     },
-                    {
-                        name: 'name',
-                        align: 'center',
+
+                    subUrlWidth: {
+                        width: '0px'
                     },
-                    {
-                        name: 'role',
-                        align: 'center',
-                    },
-                    {
-                        name: 'active',
-                        align: 'center',
-                    },
-                    {
-                        name: 'uu',
-                        align: 'center',
-                    }
-                ],
-                list: [{
-                    id: 'Test',
-                    name: '+86 987XXX321',
-                    role: 'T00001',
-                    active: '30',
-                    uu: '2018-08-15'
-                }, ]
-            };
-        }
-    }).$mount('#app')
-</script>
+
+                    showAdd: false,
+                    showAddSales: false,
+
+                    saliesLists: [
+                        '大大',
+                        '小小'
+                    ],
+
+                    chips: [],
+
+                    // items: ['页面1', '页面2'],
+
+                    theader: [{
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'e',
+                            sortable: false,
+                        },
+                        {
+                            align: 'right',
+                            value: 'f',
+                            sortable: false,
+                        },
+                        {
+                            align: 'right',
+                            value: 'g',
+                            sortable: false,
+                        },
+                        {
+                            align: 'center',
+                            value: 'h',
+                            sortable: false,
+                        },
+                    ],
+
+                    tsubHead: [{
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            align: 'left',
+                            value: 'e',
+                            sortable: false,
+                        },
+                        {
+                            align: 'right',
+                            value: 'f',
+                            sortable: false,
+                        },
+                        {
+                            align: 'right',
+                            value: 'g',
+                            sortable: false,
+                        },
+                        {
+                            align: 'center',
+                            value: 'h',
+                            sortable: false,
+                        },
+
+                    ],
+
+                    tdata: [{
+                            a: '1',
+                            a_1: '大众点评xxxxxxxxx',
+                            b: '微信',
+                            c: '',
+                            d: '二维码信息 231312',
+                            d_1: '全球领先 免费试用',
+                            e: 'http://www.google.com',
+                            f: '医生',
+                            f_1: 1000,
+                            g: '业绩',
+                            g_1: 1000,
+                            stop: false,
+
+                            children: [{
+                                    sub_id: 1,
+                                    sub_name: '王成',
+                                    url: 'http://www.google.com12312312',
+                                    f: '医生',
+                                    f_1: 1000,
+                                    g: '业绩',
+                                    g_1: 1000,
+                                },
+                                {
+                                    sub_id: 2,
+                                    sub_name: '王三',
+                                    url: 'http://www.google.com12312312',
+                                    f: '医生',
+                                    f_1: 1000,
+                                    g: '业绩',
+                                    g_1: 1000,
+                                }
+                            ]
+                        },
+                        {
+                            a: '2',
+                            a_1: '大众点评xxxxxxxxx',
+                            b: '微信',
+                            c: '',
+                            d: '二维码信息 231312',
+                            d_1: '全球领先 免费试用',
+                            e: 'http://www.google.com',
+                            f: '医生',
+                            f_1: 1000,
+                            g: '业绩',
+                            g_1: 1000,
+                            stop: true,
+
+                            children: [
+
+                            ]
+                        }
+                    ]
+                };
+            }
+        })
+    </script>
 </body>
 
 </html>

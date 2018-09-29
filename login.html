@@ -22,7 +22,7 @@
             max-width: 600px;
         }
 
-        .s-primary{
+        .s-primary {
             margin: 10px 0;
             width: 100%;
         }
@@ -30,43 +30,42 @@
 </head>
 
 <body>
-    <v-app id="app">
-        <div class="header">
-            <v-toolbar>
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>登录页面</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items class="hidden-sm-and-down">
-                    <v-btn flat>注册</v-btn>
-                    <v-btn flat>联系方式</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-        </div>
-
-        <v-container class="body" grid-list-md>
-            <div class="body-header">
-                KOOA - Sales Management System
+    <div id="app">
+        <v-app>
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>登录页面</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
 
-            <v-form>
-                <v-text-field label="用户名"></v-text-field>
-                <v-text-field label="密码" 
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    :type="show_pass ? 'text' : 'password'"
-                    @click:append="show_pass = !show_pass"
-                ></v-text-field>
-                <v-btn class="s-primary">登录</v-btn>
-
-                <div>
-                    忘记用户名或密码 
-                    <a href="#">
-                        点击找回密码
-                    </a>
+            <v-container class="body" grid-list-md>
+                <div class="body-header">
+                    KOOA - Sales Management System
                 </div>
-            </v-form>
 
-        </v-container>
-    </v-app>
+                <v-form>
+                    <v-text-field label="用户名"></v-text-field>
+                    <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'" :type="show_pass ? 'text' : 'password'"
+                        @click:append="show_pass = !show_pass"></v-text-field>
+                    <v-btn class="s-primary">登录</v-btn>
+
+                    <div>
+                        忘记用户名或密码
+                        <a href="#">
+                            点击找回密码
+                        </a>
+                    </div>
+                </v-form>
+
+            </v-container>
+        </v-app>
+    </div>
 
     <script src="./js/vue.js"></script>
     <script src="./js/vuetify.js"></script>
@@ -74,7 +73,7 @@
         new Vue({
             el: '#app',
 
-            data(){
+            data() {
                 return {
                     show_pass: false,
                 }
