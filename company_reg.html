@@ -57,7 +57,11 @@
             <v-form>
 
                 <v-text-field label="用户名"></v-text-field>
-                <v-text-field label="密码" type="password"></v-text-field>
+                <v-text-field label="密码" 
+                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                    :type="show_pass ? 'text' : 'password'"
+                    @click:append="show_pass = !show_pass"
+                ></v-text-field>
                 <v-text-field label="公司名称"></v-text-field>
                 <v-text-field label="银行账号"></v-text-field>
                 <v-text-field label="开户银行名称"></v-text-field>
@@ -88,7 +92,7 @@
                 </v-layout>
 
                 <div class="protocol">
-                    <a href="javascript:void(0)">＜同意xxx协议＞</a>
+                    <a href="javascript:void(0)" @click="dialog = true">＜同意xxx协议＞</a>
                 </div>
 
                 <v-btn color="s-primary">注册</v-btn>
@@ -125,6 +129,7 @@
             el: '#app',
             data(){
                 return {
+                    show_pass: false,
                     dialog: false
                 }
             }

@@ -32,12 +32,13 @@ body {
 }
 
 /***********/
-.s-primary {
+.s-primary,
+.pager .primary {
     background-color: #2196f3 !important;
     border-color: #2196f3 !important;
 }
 
-.theme--light.v-toolbar{
+.theme--light.v-toolbar {
     color: white;
     background-color: #42a5f5;
 }
@@ -55,6 +56,6 @@ body {
     color: white;
 }
 
-.s-table{
+.s-table {
     margin: 10px 0;
 }
