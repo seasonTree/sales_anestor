@@ -12,16 +12,6 @@
     <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
 
-    <style>
-        .export{
-            text-align: right;
-        }
-
-        .export .s-primary{
-            margin-right: 0;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -57,11 +47,16 @@
                 </template>
             </v-data-table>
 
-            <div class="export">
-                    <v-btn color="s-primary">Export Excel</v-btn>
+            <div class="text-md-center">
+                <v-pagination length="4" class="pager" v-model="pageIdx"></v-pagination>
             </div>
-            
+
+            <div class="text-md-right">
+                <v-btn color="s-primary" class="mr-0">Export Excel</v-btn>
+            </div>
+
         </v-container>
+
     </v-app>
 
     <script src="./js/vue.js"></script>
@@ -72,6 +67,8 @@
 
             data() {
                 return {
+
+                    pageIdx: 1,
 
                     theader: [{
                             text: 'Firt Name',
@@ -104,7 +101,7 @@
                             sortable: false,
                         },
                     ],
-                    tdata:[{
+                    tdata: [{
                         a: '123',
                         b: '111111',
                         c: '111111',
@@ -113,7 +110,7 @@
                     }]
                 };
             }
-        })
+        });
     </script>
 
 

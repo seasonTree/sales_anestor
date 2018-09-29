@@ -56,7 +56,11 @@
 
             <v-form>
                 <v-text-field label="用户名"></v-text-field>
-                <v-text-field label="密码" type="password"></v-text-field>
+                <v-text-field label="密码" 
+                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                    :type="show_pass ? 'text' : 'password'"
+                    @click:append="show_pass = !show_pass"
+                ></v-text-field>
                 <v-text-field label="银行账号"></v-text-field>
                 <v-text-field label="银行名称"></v-text-field>
                 <v-text-field label="银行地址"></v-text-field>
@@ -116,6 +120,7 @@
 
             data(){
                 return {
+                    show_pass: false,
                     dialog: false
                 }
             }

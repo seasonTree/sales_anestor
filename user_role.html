@@ -9,22 +9,17 @@
     <title>角色管理</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
-    <link href="./css/muse-ui.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .btn-frame {
-            margin-bottom: 10px;
-        }
-
-        .role-container{
+        .role-container {
             border: 1px solid #e3e3e3;
             width: 100%;
-            /* padding: 6px; */
         }
 
-        .role-title{
+        .role-title {
             background-color: #e3e3e3;
         }
 
@@ -41,155 +36,142 @@
 </head>
 
 <body>
-    <div id="app">
+
+    <v-app id="app">
         <div class="header">
-            <mu-appbar color="#42a5f5" class="header-content">
-                <div slot="left">
-                    角色管理
-                </div>
-
-                <div slot="right" class="nav-right">
-                    <span style="margin-right: 10px;">注册</span>
-                    <span style="margin-right: 10px;">联系方式</span>
-                    <!-- <mu-menu open-on-hover>
-                    <div color="primary">系统信息</div>
-                    <mu-list slot="content">
-                        <mu-list-item button>
-
-                            <mu-menu open-on-hover placement="left">
-                                <div>
-                                    角色管理
-                                </div>
-                                <mu-list slot="content">
-                                    <mu-list-item button>fdsa</mu-list-item>
-                                </mu-list>
-                            </mu-menu>
-
-                        </mu-list-item>
-                    </mu-list>
-                </mu-menu> -->
-                </div>
-            </mu-appbar>
+            <v-toolbar>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>角色管理</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>注册</v-btn>
+                    <v-btn flat>联系方式</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
         </div>
 
-        <mu-container class="body">
+        <v-container class="body" grid-list-md>
             <div class="body-header">
                 角色管理
             </div>
 
-            <div class="btn-frame">
-                <mu-button color="primary" @click="openSimpleDialog">新增角色</mu-button>
+            <div class="action-bar">
+                <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                    <v-icon dark>add</v-icon>新增
+                </v-btn>
             </div>
 
-            <!-- <mu-paper :z-depth="1"> -->
-            <mu-data-table border :columns="columns" :data="list" class="table-content">
-                <template slot-scope="scope">
-                    <td>{{scope.row.id}}</td>
-                    <td class="is-right">{{scope.row.role_name}}</td>
-                    <td class="is-right">{{scope.row.user_list}}</td>
-                    <td class="is-right">{{scope.row.desc}}</td>
-                    <td class="is-center">
-                        <mu-button small fab>
-                            <mu-icon value="edit"></mu-icon>
-                        </mu-button>
-                        <mu-button small fab>
-                            <mu-icon value="delete_forever"></mu-icon>
-                        </mu-button>
+
+            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                <template slot="items" slot-scope="props">
+                    <td class="text-xs-left">{{ props.item.a }}</td>
+                    <td class="text-xs-left">{{ props.item.b }}</td>
+                    <td class="text-xs-left">{{ props.item.c }}</td>
+                    <td class="text-xs-left">{{ props.item.d }}</td>
+                    <td class="text-xs-center">
+                        <v-icon small class="mr-2">
+                            edit
+                        </v-icon>
+                        <v-icon small>
+                            delete
+                        </v-icon>
                     </td>
                 </template>
-            </mu-data-table>
-            <!-- </mu-paper> -->
+            </v-data-table>
+        </v-container>
 
-            <mu-dialog title="角色新增" width="600" :open.sync="openSimple">
-                <mu-form label-position="right" label-width="80">
-                    <mu-form-item label="角色名称">
-                        <mu-text-field prop="username"></mu-text-field>
-                    </mu-form-item>
-                    <mu-form-item label="网站权限">
+        <v-dialog v-model="showAdd" width="500">
+            <v-card>
+                <v-card-title class="headline grey lighten-2" primary-title>
+                    新增
+                </v-card-title>
+
+                <v-card-text>
+                    <v-form>
+                        <v-text-field label="角色名称"></v-text-field>
                         <div class="role-container">
                             <div class="role role-title">
-                                <mu-checkbox v-model="checkbox" value="a" label="会员管理"></mu-checkbox>
+                                <v-checkbox label="会员管理" hide-details color="info"></v-checkbox>
                             </div>
                             <ul class="role">
                                 <li>
-                                    <mu-checkbox v-model="checkbox" value="b" label="会员列表"></mu-checkbox>
+                                    <v-checkbox label="会员管理" hide-details color="info"></v-checkbox>
                                 </li>
                                 <li>
-                                    <mu-checkbox v-model="checkbox" value="c" label="会员审核"></mu-checkbox>
+                                    <v-checkbox label="会员管理" hide-details color="info"></v-checkbox>
                                 </li>
                             </ul>
                         </div>
-                    </mu-form-item>
-                </mu-form>
+                    </v-form>
+                </v-card-text>
 
-                <mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">确定</mu-button>
-                <mu-button slot="actions" flat @click="closeSimpleDialog">关闭</mu-button>
-            </mu-dialog>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="s-primary" @click="showAdd = false">
+                        确认
+                    </v-btn>
+                    <v-btn color="primary" flat @click="showAdd = false">
+                        取消
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
 
-        </mu-container>
+    </v-app>
 
-        <script src="./js/vue.js"></script>
-        <script src="./js/muse-ui.js"></script>
-        <script>
-            new Vue({
-                data() {
-                    return {
-                        checkbox: [],
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
 
-                        openSimple: false,
+            data() {
+                return {
+                    showAdd: false,
 
-                        columns: [{
-                                title: 'ID',
-                                name: 'id'
-                            },
-                            {
-                                title: '角色名称',
-                                name: 'role_name',
-                                align: 'center',
-                            },
-                            {
-                                title: '用户列表',
-                                name: 'user_list',
-                                align: 'center',
-                            },
-                            {
-                                title: '描述',
-                                name: 'desc',
-                                align: 'center',
-                            },
-                            {
-                                title: '操作',
-                                name: 'active',
-                                align: 'center',
-                            }
-                        ],
-                        list: [{
-                                id: '1',
-                                role_name: '销售管理员',
-                                user_list: '小明，小红',
-                                desc: '销售员禁用',
-                            },
-                            // {
-                            //     id: '2',
-                            //     role_name: '会员列表',
-                            //     user_list: 'admin user memberlist',
-                            //     active: '是',
-                            // },
-                        ]
-                    };
-                },
+                    items: ['页面1', '页面2'],
 
-                methods: {
-                    openSimpleDialog() {
-                        this.openSimple = true;
-                    },
-                    closeSimpleDialog() {
-                        this.openSimple = false;
-                    }
+                    theader: [{
+                            text: 'ID',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '角色名称',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '用户列表',
+                            align: 'left',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '描述',
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            text: '操作',
+                            align: 'center',
+                            value: 'e',
+                            sortable: false,
+                        }
+                    ],
+                    tdata: [{
+                        a: '1',
+                        b: '管理员',
+                        c: 'aaa,bbb',
+                        d: '用户管理员'
+                    }]
                 }
-            }).$mount('#app')
-        </script>
-
+            }
+        });
+    </script>
 </body>
 
 </html>

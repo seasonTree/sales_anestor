@@ -9,20 +9,140 @@
     <title>权限管理</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
-    <link href="./css/muse-ui.css" rel="stylesheet" />
-    <link href="./css/material-icons.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
-
-    <style>
-        .btn-frame {
-            margin-bottom: 10px;
-        }
-    </style>
 
 </head>
 
 <body>
-    <div id="app">
+    <v-app id="app">
+        <div class="header">
+            <v-toolbar>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>权限管理</v-toolbar-title>
+                <v-spacer></v-spacer>
+
+                <!-- TODO -->
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>注册</v-btn>
+                    <v-btn flat>联系方式</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
+        </div>
+
+
+        <v-container class="body" grid-list-md>
+            <div class="body-header">
+                权限管理
+            </div>
+
+            <div class="action-bar">
+                <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                    <v-icon dark>add</v-icon>新增
+                </v-btn>
+            </div>
+
+
+            <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
+                <template slot="items" slot-scope="props">
+                    <td class="text-xs-left">{{ props.item.a }}</td>
+                    <td class="text-xs-left">{{ props.item.b }}</td>
+                    <td class="text-xs-right">{{ props.item.c }}</td>
+                    <td class="text-xs-center">
+                        <v-icon small class="mr-2">
+                            edit
+                        </v-icon>
+                        <v-icon small>
+                            delete
+                        </v-icon>
+
+                    </td>
+                </template>
+            </v-data-table>
+
+            <v-dialog v-model="showAdd" width="500">
+                <v-card>
+                    <v-card-title class="headline grey lighten-2" primary-title>
+                        新增
+                    </v-card-title>
+
+                    <v-card-text>
+                        <v-form>
+                            <v-select :items="items" label="上级权限"></v-select>
+                            <v-text-field label="权限名称"></v-text-field>
+                            <v-text-field label="模块"></v-text-field>
+                            <v-text-field label="控制器"></v-text-field>
+                            <v-text-field label="方法"></v-text-field>
+                        </v-form>
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="s-primary" @click="showAdd = false">
+                            确认
+                        </v-btn>
+                        <v-btn color="primary" flat @click="showAdd = false">
+                            取消
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+
+        </v-container>
+
+    </v-app>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+
+            data() {
+                return {
+
+                    showAdd: false,
+
+                    items: ['页面1', '页面2'],
+
+                    theader: [{
+                            text: 'ID',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '权限名称',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '字段名',
+                            align: 'right',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '操作',
+                            align: 'center',
+                            value: 'd',
+                            sortable: false,
+                        },
+                    ],
+                    tdata: [{
+                        a: '1',
+                        b: '会员管理',
+                        c: 'admin   user   memberlst',
+                    }]
+                };
+            }
+        })
+    </script>
+
+
+    <!-- <div id="app">
         <div class="header">
             <mu-appbar color="#42a5f5" class="header-content">
                 <div slot="left">
@@ -32,23 +152,6 @@
                 <div slot="right" class="nav-right">
                     <span style="margin-right: 10px;">注册</span>
                     <span style="margin-right: 10px;">联系方式</span>
-                    <!-- <mu-menu open-on-hover>
-                    <div color="primary">系统信息</div>
-                    <mu-list slot="content">
-                        <mu-list-item button>
-
-                            <mu-menu open-on-hover placement="left">
-                                <div>
-                                    权限管理
-                                </div>
-                                <mu-list slot="content">
-                                    <mu-list-item button>fdsa</mu-list-item>
-                                </mu-list>
-                            </mu-menu>
-
-                        </mu-list-item>
-                    </mu-list>
-                </mu-menu> -->
                 </div>
             </mu-appbar>
         </div>
@@ -62,13 +165,11 @@
                 <mu-button color="primary" @click="openSimpleDialog">新增权限</mu-button>
             </div>
 
-            <!-- <mu-paper :z-depth="1"> -->
             <mu-data-table border :columns="columns" :data="list" class="table-content">
                 <template slot-scope="scope">
                     <td>{{scope.row.id}}</td>
                     <td class="is-right">{{scope.row.pri_name}}</td>
                     <td class="is-right">{{scope.row.fields}}</td>
-                    <!--<td class="is-right">{{scope.row.active}}</td>-->
                     <td class="is-center">
                         <mu-button small fab>
                             <mu-icon value="edit"></mu-icon>
@@ -79,7 +180,6 @@
                     </td>
                 </template>
             </mu-data-table>
-            <!-- </mu-paper> -->
 
             <mu-dialog title="权限新增" width="420" :open.sync="openSimple">
                 <mu-form ref="form" class="mu-demo-form" label-position="right" label-width="80">
@@ -174,6 +274,8 @@
             }
         }).$mount('#app')
     </script>
+
+     -->
 
 </body>
 
