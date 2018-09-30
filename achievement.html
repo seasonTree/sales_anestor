@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>渠道</title>
+    <title>业绩</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/vuetify.min.css" rel="stylesheet" />
@@ -14,73 +14,49 @@
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .main-table-sub {
-            color: #c5c4c4;
+        .date-container>div {
+            display: inline-block;
+        }
+
+        /* .sub-container {
+            padding-left: 40px;
+        } */
+
+        .sub-item-sp {
+            padding: 3px;
             border: 1px solid #e3e3e3;
-            padding: 4px;
-            margin: 6px 0;
-        }
-
-        .qr-container {
-            padding: 4px;
-            margin: 4px 0;
-        }
-
-        .qrcode-image {
-            min-height: 80px;
-            min-width: 80px;
-            height: 100%;
-            width: 100%;
-            border: 1px solid #e3e3e3;
-            border-radius: 6px;
-        }
-
-        .download-qrcode {
-            color: #2196f3;
-            border-color: #2196f3;
-            border-radius: 6px;
-            text-align: center;
-            display: block;
-            text-decoration: none;
-        }
-
-        .download-qrcode:hover {
-            color: white;
-            background-color: #2196f3;
-        }
-
-        .table-sub-number {
-            color: #8BC34A;
         }
 
         .sub-item {
-            padding: 10px 0;
+            margin-bottom: 10px;
         }
 
         .line {
             height: 1px;
             background-color: #e3e3e3;
-            width: 100%;
+            padding: 0 !important;
+            margin: 10px 0;
         }
 
-        .sub-item div {
-            display: inline-block;
+        .sp-color {
+            color: #4CAF50;
         }
 
-        .sub-right {
-            float: right;
+        .sp-color svg {
+            transform: rotate(-90deg);
+            background: yellowgreen;
+            border-radius: 50%;
+            margin-bottom: -6px;
+            margin-right: 3px;
         }
 
-        .clearfix:after {
-            display: block;
-            content: '';
-            clear: both;
-            height: 0;
+        .sp-color svg circle {
+            fill: yellowgreen;
         }
 
-        .sub-right .sub-right-item,
-        .sub-left {
-            padding: 0 24px;
+        .item-arrow{
+            margin-left: -12px;
+            margin-bottom: -4px;
         }
     </style>
 
@@ -92,7 +68,7 @@
             <div class="header">
                 <v-toolbar>
                     <v-toolbar-side-icon></v-toolbar-side-icon>
-                    <v-toolbar-title>渠道</v-toolbar-title>
+                    <v-toolbar-title>业绩</v-toolbar-title>
                     <v-spacer></v-spacer>
 
                     <!-- TODO -->
@@ -104,179 +80,189 @@
             </div>
 
 
-            <v-container class="body" grid-list-md>
+            <v-container class="body" grid-list-md text-xs-center>
                 <div class="body-header">
-                    渠道
+                    业绩
                 </div>
 
-                <div class="action-bar">
-                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
-                        <v-icon dark>add</v-icon>新增渠道
-                    </v-btn>
+                <div class="text-xs-right date-container">
+                    <span class="px-2">从</span>
+                    <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
+                        :return-value.sync="dateFm" lazy transition="scale-transition" offset-y>
+                        <v-text-field slot="activator" v-model="dateFm" prepend-icon="event" readonly></v-text-field>
+                        <v-date-picker v-model="dateFm" @input="$refs.menu.save(dateFm)"></v-date-picker>
+                    </v-menu>
+                    </v-date-picker>
+                    <span class="px-2">至</span>
+                    <v-menu ref="menu1" :close-on-content-click="false" v-model="menu1" :nudge-right="40"
+                        :return-value.sync="dateTo" lazy transition="scale-transition" offset-y>
+                        <v-text-field slot="activator" v-model="dateTo" prepend-icon="event" readonly></v-text-field>
+                        <v-date-picker v-model="dateTo" @input="$refs.menu1.save(dateTo)"></v-date-picker>
+                    </v-menu>
+
+                    <div>
+                        <v-select :items="month" label="月份"></v-select>
+                    </div>
+
                 </div>
 
-                <v-layout v-resize="onTabelResize">
-                    <v-data-table :headers="theader" :items="tdata" hide-headers hide-actions item-key="a" expand class="elevation-1 s-table"
+                <v-layout align-center>
+                    <v-data-table :headers="theader" :items="tdata" hide-actions item-key="a" expand class="elevation-1 s-table"
                         ref="dTable">
 
                         <template slot="items" slot-scope="props">
                             <tr @click="props.expanded = !props.expanded">
+
                                 <td class="text-xs-left" ref="td1">
+                                    <v-icon v-if="props.expanded" xs class="item-arrow">
+                                        keyboard_arrow_down
+                                    </v-icon>
+
+                                    <v-icon v-if="!props.expanded" xs class="item-arrow">
+                                        keyboard_arrow_right
+                                    </v-icon>
+
                                     {{ props.item.a }}
                                 </td>
-                                <td class="text-xs-left">
+                                <td class="text-xs-right">
                                     {{ props.item.b }}
-                                    <div class="main-table-sub">
-                                        {{ props.item.a_1 }}
-                                    </div>
                                 </td>
-                                <td class="text-xs-left">
-                                    <div class="qr-container">
-                                        <v-img src="./images/webwxgetmsgimg.jpeg" class="qrcode-image" contain>
-                                    </div>
+                                <td class="text-xs-right sp-color">
+                                    {{ props.item.b }}
                                 </td>
-                                <td class="text-xs-left">
+                                <td class="text-xs-right">
                                     {{ props.item.d }}
-                                    <div class="main-table-sub">
-                                        {{ props.item.d_1 }}
-                                    </div>
                                 </td>
-                                <td class="text-xs-left" ref="td2">
-                                    {{ props.item.e }}
-                                    <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
+                                <td class="text-xs-right sp-color">
+
+                                    <svg width="20" height="20" viewBox="0 0 20 20">
+                                        <circle r="10" cx="10" cy="10" stroke="#655" stroke-width="20"
+                                            :stroke-dasharray="props.item.pie"></circle>
+                                    </svg>
+
+                                    <span>
+                                        {{ props.item.e }}%
+                                    </span>
                                 </td>
                                 <td class="text-xs-right">
                                     {{ props.item.f }}
-                                    <div class="table-sub-number">
-                                        {{ props.item.f_1 }}
-                                    </div>
                                 </td>
                                 <td class="text-xs-right">
                                     {{ props.item.g }}
-                                    <div class="table-sub-number">
-                                        {{ props.item.g_1 }}
-                                    </div>
                                 </td>
-                                <td class="text-xs-center" ref="td5">
-                                    <v-icon v-if="props.item.stop" class="mr-2" color="red" title="停止">
-                                        block
+                                <td class="text-xs-right sp-color">
+                                    {{ props.item.h }}
+                                </td>
+                                <td class="text-xs-right sp-color">
+                                    {{ props.item.i }}%
+                                </td>
+                                <td class="text-xs-right">
+                                    {{ props.item.j }}%
+                                </td>
+                                <td class="text-xs-right">
+                                    ${{ props.item.k }}
+                                </td>
+                                <td class="text-xs-center">
+                                    <v-icon v-if="props.item.l" md class="mr-2" color="red" title="停止">
+                                        cancel
                                     </v-icon>
 
-                                    <v-icon v-if="!props.item.stop" class="mr-2" color="light-green" title="开始">
+                                    <v-icon v-if="!props.item.l" md class="mr-2" color="light-green" title="开始">
                                         lens
                                     </v-icon>
                                 </td>
                             </tr>
                         </template>
 
-                        <!-- flex 可以去掉inline-block的间隙 -->
                         <template slot="expand" slot-scope="props">
-                            <div v-for="(subItem, subIdx) in props.item.children" :key="subIdx" class="sub-item clearfix"
-                                :style="subSytle">
-                                <div class="sub-left">
-                                    <span>{{subItem.sub_id}}</span>
-                                    <span>{{subItem.sub_name}}</span>
-                                </div>
-                                <div class="sub-right">
+                            <v-container grid-list-md text-xs-left>
+
+                                <template v-if="props.item.children.length">
                                     <v-layout row wrap>
-                                        <div class="text-xs-left sub-right-item ellipsis" :style="subUrlWidth">
-                                            <span :title="subItem.url">{{ subItem.url }}</span>
-                                            <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
-                                        </div>
-                                        <div class="text-xs-right sub-right-item">
-                                            <p>
-                                                {{ subItem.f }}
-                                            </p>
+                                        <template xs12 v-for="(subItem, subIdx) in props.item.children" :key="subIdx">
+                                            <v-flex xs2 offset-xs1>
+                                                {{subItem.a}}
+                                            </v-flex>
+                                            <v-flex xs2>
+                                                {{subItem.b}}
+                                            </v-flex>
+                                            <v-flex xs1>
+                                                <span class="sub-item-sp">
+                                                    {{subItem.c}}
+                                                </span>
 
-                                            <div class="table-sub-number">
-                                                {{ subItem.f_1 }}
-                                            </div>
-                                        </div>
+                                            </v-flex>
+                                            <v-flex xs1>
+                                                {{subItem.d}}
+                                            </v-flex>
 
-                                        <div class="text-xs-right sub-right-item">
-                                            <p>
-                                                {{ subItem.g }}
-                                            </p>
-                                            <div class="table-sub-number">
-                                                {{ subItem.g_1 }}
-                                            </div>
-                                        </div>
+                                            <v-flex xs1>
+                                                <span class="sub-item-sp">
+                                                    {{subItem.e}}
+                                                </span>
+                                            </v-flex>
+
+                                            <v-flex xs1>
+                                                {{subItem.f}}
+                                            </v-flex>
+
+                                            <v-flex xs1>
+                                                <span class="sub-item-sp">
+                                                    {{subItem.g}}
+                                                </span>
+                                            </v-flex>
+                                            <v-flex xs2>
+                                                {{subItem.h}}
+                                            </v-flex>
+                                        </template>
+
+                                        <!-- 汇总 -->
+                                        <v-flex xs7 offset-xs5 class="line"></v-flex>
+                                        <!-- <div class="sub-item-total"> -->
+                                        <v-flex xs1 offset-xs5>
+                                            <span class="sub-item-sp">
+                                                {{props.item.childTotal.a}}
+                                            </span>
+
+                                        </v-flex>
+                                        <v-flex xs1>
+                                            {{props.item.childTotal.b}}
+                                        </v-flex>
+
+                                        <v-flex xs1>
+                                            <span class="sub-item-sp">
+                                                {{props.item.childTotal.c}}
+                                            </span>
+                                        </v-flex>
+
+                                        <v-flex xs1>
+                                            {{props.item.childTotal.d}}
+                                        </v-flex>
+
+                                        <v-flex xs1>
+                                            <span class="sub-item-sp">
+                                                {{props.item.childTotal.e}}
+                                            </span>
+                                        </v-flex>
+                                        <v-flex xs2>
+                                            {{props.item.childTotal.f}}
+                                        </v-flex>
+                                        <!-- </div> -->
+
                                     </v-layout>
-                                </div>
+                                    <!-- </v-layout> -->
+                                </template>
 
-                                <div class="line"></div>
-                            </div>
-
-                            <div :style="subSytle">
-                                <v-btn color="s-primary" ml="0" @click="showAddSales = true">
-                                    <v-icon dark>add</v-icon>新增销售员
-                                </v-btn>
-                            </div>
+                                <template v-if="!props.item.children.length">
+                                    <div class="text-xs-center">
+                                        暂无数据
+                                    </div>
+                                </template>
+                            </v-container>
                         </template>
+
                     </v-data-table>
                 </v-layout>
-
-                <v-dialog scrollable v-model="showAdd" width="500">
-                    <v-card>
-                        <v-card-title class="headline grey lighten-2" primary-title>
-                            新增
-                        </v-card-title>
-
-                        <v-card-text>
-                            <v-form>
-                                <v-text-field label="渠道名称"></v-text-field>
-                                <v-text-field label="描述信息"></v-text-field>
-                                <v-text-field label="二维码附加信息"></v-text-field>
-                            </v-form>
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="s-primary" @click="showAdd = false">
-                                确认
-                            </v-btn>
-                            <v-btn color="primary" flat @click="showAdd = false">
-                                取消
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-
-                <v-dialog scrollable v-model="showAddSales" width="500">
-                    <v-card>
-                        <v-card-title class="headline grey lighten-2" primary-title>
-                            新增销售员
-                        </v-card-title>
-
-                        <v-card-text>
-                            <v-form>
-                                <v-combobox v-model="chips" :items="saliesLists" label="请选择销售员" chips clearable
-                                    prepend-icon="filter_list" solo multiple>
-                                    <template slot="selection" slot-scope="data">
-                                        <v-chip :selected="data.selected" close @input="remove(data)">
-                                            <strong>{{ data.item }}</strong>&nbsp;
-                                        </v-chip>
-                                    </template>
-                                </v-combobox>
-                            </v-form>
-                        </v-card-text>
-
-
-
-                        <v-btn color="s-primary">开通账号</v-btn>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="s-primary" @click="showAddSales = false">
-                                确认
-                            </v-btn>
-                            <v-btn color="primary" flat @click="showAddSales = false">
-                                取消
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-
             </v-container>
 
         </v-app>
@@ -288,202 +274,179 @@
         new Vue({
             el: '#app',
 
-            mounted() {
-                for (let i = 0; i < this.tdata.length; i += 1) {
-                    const item = this.tdata[i];
-                    this.$set(this.$refs.dTable.expanded, item.a, true)
-                }
-
-                var that = this;
-
-                setTimeout(function () {
-                    that.calcWidth();
-                }, 100);
-            },
-
             methods: {
-                onTabelResize() {
-                    this.calcWidth();
-                },
-
-                calcWidth() {
-                    var td1Width = this.$refs.td1.offsetWidth,
-                        td2Width = this.$refs.td2.offsetWidth,
-                        td5Width = this.$refs.td5.offsetWidth,
-                        left = td1Width,
-                        right = td5Width;
-
-                    this.subUrlWidth['width'] = td2Width + 'px';
-                    this.subSytle['paddingLeft'] = left + 'px';
-                    this.subSytle['paddingRight'] = right + 'px';
-                },
-
-                remove(item) {
-                    this.chips.splice(this.chips.indexOf(item), 1)
-                    this.chips = [...this.chips]
-                }
+                createPie() {}
             },
 
             data() {
                 return {
-                    subSytle: {
-                        paddingLeft: '0px',
-                        paddingRight: '0px'
+                    dateFm: null,
+                    dateTo: null,
+                    menu: false,
+                    menu1: false,
+
+                    mounted() {
+
+                        for (let i = 0; i < this.tdata.length; i += 1) {
+                            const item = this.tdata[i];
+
+                            // item['pie'] = (item['e'] / 100 * 72) + ' 100'
+
+                            this.$set(this.$refs.dTable.expanded, item.a, true)
+                        }
                     },
 
-                    subUrlWidth: {
-                        width: '0px'
-                    },
+                    // methods:{
+                    //     calcPiePer(value){
+                    //         return (value / 100 * 72) + ' 100';
+                    //     }
+                    // },
 
-                    showAdd: false,
-                    showAddSales: false,
-
-                    saliesLists: [
-                        '大大',
-                        '小小'
+                    month: ['1月', '2月', '3月', '4月', '5月', '6月',
+                        '7月', '8月', '9月', '10月', '11月', '12月'
                     ],
-
-                    chips: [],
-
-                    // items: ['页面1', '页面2'],
 
                     theader: [{
+                            text: '销售',
                             align: 'left',
                             value: 'a',
                             sortable: false,
                         },
                         {
-                            align: 'left',
+                            text: '销售目标',
+                            align: 'right',
                             value: 'b',
                             sortable: false,
                         },
                         {
-                            align: 'left',
+                            text: '完成量',
+                            align: 'right',
                             value: 'c',
-                            sortable: false,
+                            sortable: true,
                         },
                         {
-                            align: 'left',
+                            text: '未完成量',
+                            align: 'right',
                             value: 'd',
-                            sortable: false,
+                            sortable: true,
                         },
                         {
-                            align: 'left',
+                            text: '完成比例',
+                            align: 'center',
                             value: 'e',
-                            sortable: false,
+                            sortable: true,
                         },
                         {
+                            text: '医生量指标',
                             align: 'right',
                             value: 'f',
                             sortable: false,
                         },
                         {
+                            text: '完成量',
                             align: 'right',
                             value: 'g',
                             sortable: false,
                         },
                         {
-                            align: 'center',
+                            text: '未完成量',
+                            align: 'right',
                             value: 'h',
                             sortable: false,
                         },
-                    ],
+                        {
+                            text: '%',
+                            align: 'right',
+                            value: 'i',
+                            sortable: false,
+                        },
 
-                    tsubHead: [{
-                            align: 'left',
-                            value: 'a',
-                            sortable: false,
-                        },
                         {
-                            align: 'left',
-                            value: 'b',
-                            sortable: false,
-                        },
-                        {
-                            align: 'left',
-                            value: 'c',
-                            sortable: false,
-                        },
-                        {
-                            align: 'left',
-                            value: 'd',
-                            sortable: false,
-                        },
-                        {
-                            align: 'left',
-                            value: 'e',
-                            sortable: false,
-                        },
-                        {
+                            text: '提成%',
                             align: 'right',
-                            value: 'f',
+                            value: 'j',
                             sortable: false,
                         },
+
                         {
+                            text: '提成$',
                             align: 'right',
-                            value: 'g',
+                            value: 'k',
                             sortable: false,
                         },
                         {
+                            text: '状态',
                             align: 'center',
-                            value: 'h',
+                            value: 'l',
                             sortable: false,
                         },
-
                     ],
 
                     tdata: [{
-                            a: '1',
-                            a_1: '大众点评xxxxxxxxx',
-                            b: '微信',
-                            c: '',
-                            d: '二维码信息 231312',
-                            d_1: '全球领先 免费试用',
-                            e: 'http://www.google.com',
-                            f: '医生',
-                            f_1: 1000,
-                            g: '业绩',
-                            g_1: 1000,
-                            stop: false,
+                            a: '王成',
+                            b: 5000,
+                            c: 3751,
+                            d: 1249,
+                            e: 72,
+                            f: 300,
+                            g: 150,
+                            h: 150,
+                            i: 50,
+                            j: 20,
+                            k: 13500,
+                            l: false,
+                            pie: '44 100', //左边是62 * e的百分比, 笔的总宽度是62px
 
                             children: [{
-                                    sub_id: 1,
-                                    sub_name: '王成',
-                                    url: 'http://www.google.com12312312',
-                                    f: '医生',
-                                    f_1: 1000,
-                                    g: '业绩',
-                                    g_1: 1000,
+                                    a: '李文',
+                                    b: 136521566145,
+                                    c: 12132,
+                                    d: 1111,
+                                    e: 1355454,
+                                    f: 15,
+                                    g: 1225,
+                                    h: 123
                                 },
                                 {
-                                    sub_id: 2,
-                                    sub_name: '王三',
-                                    url: 'http://www.google.com12312312',
-                                    f: '医生',
-                                    f_1: 1000,
-                                    g: '业绩',
-                                    g_1: 1000,
+                                    a: '李三',
+                                    b: 1365215661,
+                                    c: 12132,
+                                    d: 1111,
+                                    e: 1355454,
+                                    f: 15,
+                                    g: 1225,
+                                    h: 123
                                 }
-                            ]
+                            ],
+
+                            childTotal: {
+                                a: 12132,
+                                b: 1111,
+                                c: 1355454,
+                                d: 15,
+                                e: 1225,
+                                f: 1111
+                            }
                         },
                         {
-                            a: '2',
-                            a_1: '大众点评xxxxxxxxx',
-                            b: '微信',
-                            c: '',
-                            d: '二维码信息 231312',
-                            d_1: '全球领先 免费试用',
-                            e: 'http://www.google.com',
-                            f: '医生',
-                            f_1: 1000,
-                            g: '业绩',
-                            g_1: 1000,
-                            stop: true,
+                            a: '王李',
+                            b: 5000,
+                            c: 3751,
+                            d: 1249,
+                            e: 72,
+                            f: 300,
+                            g: 150,
+                            h: 150,
+                            i: 50,
+                            j: 20,
+                            k: 13500,
+                            l: true,
+                            pie: '44 100', //左边是62 * e的百分比, 笔的总宽度是62px
 
                             children: [
 
                             ]
-                        }
+                        },
                     ]
                 };
             }

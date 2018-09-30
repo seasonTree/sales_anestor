@@ -18,7 +18,7 @@ body {
     margin-top: 20px;
     background-color: white;
     padding: 20px;
-    max-width: 1024px;
+    /* max-width: 1024px; */
     border-radius: 10px;
 }
 
@@ -52,12 +52,21 @@ body {
     color: white;
 }
 
+.v-date-picker-table .theme--light.v-btn{
+    color: rgba(0,0,0,.87);
+}
+
+.date-container .v-input__control{
+    max-width: 110px;
+}
+
 .v-toolbar__title {
     color: white;
 }
 
 .s-table {
     margin: 10px 0;
+    width: 100%;
 }
 
 .ellipsis{
