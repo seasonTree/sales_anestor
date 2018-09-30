@@ -19,7 +19,6 @@
             border: 1px solid #e3e3e3;
             padding: 4px;
             margin: 6px 0;
-            /* text-align: center; */
         }
 
         .qr-container {
@@ -55,8 +54,7 @@
         }
 
         .sub-item {
-            padding: 0;
-            margin: 10px 0;
+            padding: 10px 0;
         }
 
         .line {
@@ -65,17 +63,12 @@
             width: 100%;
         }
 
-        /* .sub-item:last-of-type .line{
-            display: none;
-        } */
-
         .sub-item div {
             display: inline-block;
         }
 
         .sub-right {
             float: right;
-            margin-right: -4px;
         }
 
         .clearfix:after {
@@ -89,7 +82,6 @@
         .sub-left {
             padding: 0 24px;
         }
-
     </style>
 
 </head>
@@ -177,6 +169,7 @@
                             </tr>
                         </template>
 
+                        <!-- flex 可以去掉inline-block的间隙 -->
                         <template slot="expand" slot-scope="props">
                             <div v-for="(subItem, subIdx) in props.item.children" :key="subIdx" class="sub-item clearfix"
                                 :style="subSytle">
@@ -185,30 +178,30 @@
                                     <span>{{subItem.sub_name}}</span>
                                 </div>
                                 <div class="sub-right">
-                                    <!-- <v-layout row wrap> -->
-                                    <div class="text-xs-left sub-right-item ellipsis" :style="subUrlWidth">
-                                        <span :title="subItem.url">{{ subItem.url }}</span>
-                                        <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
-                                    </div>
-                                    <div class="text-xs-right sub-right-item">
-                                        <p>
-                                            {{ subItem.f }}
-                                        </p>
-
-                                        <div class="table-sub-number">
-                                            {{ subItem.f_1 }}
+                                    <v-layout row wrap>
+                                        <div class="text-xs-left sub-right-item ellipsis" :style="subUrlWidth">
+                                            <span :title="subItem.url">{{ subItem.url }}</span>
+                                            <a class="main-table-sub download-qrcode" href="javascript:void(0);">下载二维码</a>
                                         </div>
-                                    </div>
+                                        <div class="text-xs-right sub-right-item">
+                                            <p>
+                                                {{ subItem.f }}
+                                            </p>
 
-                                    <div class="text-xs-right sub-right-item">
-                                        <p>
-                                            {{ subItem.g }}
-                                        </p>
-                                        <div class="table-sub-number">
-                                            {{ subItem.g_1 }}
+                                            <div class="table-sub-number">
+                                                {{ subItem.f_1 }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- </v-layout> -->
+
+                                        <div class="text-xs-right sub-right-item">
+                                            <p>
+                                                {{ subItem.g }}
+                                            </p>
+                                            <div class="table-sub-number">
+                                                {{ subItem.g_1 }}
+                                            </div>
+                                        </div>
+                                    </v-layout>
                                 </div>
 
                                 <div class="line"></div>

@@ -13,12 +13,27 @@
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .export{
+        /* .export {
             text-align: right;
         }
 
-        .export .s-primary{
+        .export .s-primary {
             margin-right: 0;
+        } */
+
+        .upload-container {
+            height: 100%;
+            line-height: 140px;
+            text-align: center;
+            border: 4px dotted #efefef;
+            cursor: pointer;
+            margin-left: 6px;
+            /* margin-right: 0; */
+        }
+
+        .upload-container:first-of-type{
+            margin-right: 6px;
+            margin-left: 0;
         }
     </style>
 
@@ -46,6 +61,11 @@
                 Team
             </div>
 
+            <div class="action-bar">
+                <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                    <v-icon dark>add</v-icon>新增团队
+                </v-btn>
+            </div>
 
             <v-data-table :headers="theader" :items="tdata" hide-actions class="elevation-1 s-table">
                 <template slot="items" slot-scope="props">
@@ -54,16 +74,60 @@
                     <td class="text-xs-right">{{ props.item.c }}</td>
                     <td class="text-xs-left">{{ props.item.d }}</td>
                     <td class="text-xs-left">{{ props.item.e }}</td>
-                    <td class="text-xs-left">{{ props.item.f }}</td>
+                    <td class="text-xs-left">
+                        <v-checkbox color="info" hide-details></v-checkbox>
+                    </td>
                 </template>
             </v-data-table>
-
-            <div class="">
-                    <v-btn color="s-primary">添加</v-btn>
-                    
-            </div>
-            
         </v-container>
+
+        <v-dialog scrollable v-model="showAdd" width="600">
+            <v-card>
+                <v-card-title class="headline grey lighten-2" primary-title>
+                    新增
+                </v-card-title>
+
+                <v-card-text>
+                    <v-form>
+                        <v-text-field label="用户名"></v-text-field>
+                        <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'" :type="show_pass ? 'text' : 'password'"
+                            @click:append="show_pass = !show_pass"></v-text-field>
+                        <v-text-field label="姓"></v-text-field>
+                        <v-text-field label="名字"></v-text-field>
+                        <v-text-field label="银行账号"></v-text-field>
+                        <v-text-field label="银行名称"></v-text-field>
+                        <v-text-field label="银行地址"></v-text-field>
+                        <v-text-field label="开户名"></v-text-field>
+                        <v-text-field label="固定电话"></v-text-field>
+                        <v-text-field label="移动电话"></v-text-field>
+
+                        <v-layout row wrap>
+                            <v-flex xs6>
+                                <div class="upload-container">
+                                    个人照片
+                                </div>
+                            </v-flex>
+
+                            <v-flex xs6>
+                                <div class="upload-container">
+                                    身份证照片
+                                </div>
+                            </v-flex>
+                        </v-layout>
+                    </v-form>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="s-primary" @click="showAdd = false">
+                        确认
+                    </v-btn>
+                    <v-btn color="primary" flat @click="showAdd = false">
+                        取消
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-app>
 
     <script src="./js/vue.js"></script>
@@ -74,6 +138,9 @@
 
             data() {
                 return {
+
+                    showAdd: false,
+                    show_pass: false,
 
                     theader: [{
                             text: '姓名',
@@ -112,23 +179,28 @@
                             sortable: false,
                         },
                     ],
-                    tdata:[
-                    {
-                        a: '王成',
-                        b: '187563245',
-                        c: '微信1(大众点评)',
-                        d: '50000',
-                        e: '10000',
-                        f: '',
-                    },
-                    {
-                        a: '李成功',
-                        b: '1821503112',
-                        c: '医生合作',
-                        d: '50000',
-                        e: '10000',
-                        f: '',
-                    }
+                    tdata: [{
+                            a: '王成',
+                            b: '187563245',
+                            c: '微信1(大众点评)',
+                            d: '50000',
+                            e: '10000',
+                        },
+
+                        {
+                            a: '',
+                            b: '',
+                            c: '微信1(大众点评)',
+                            d: '50000',
+                            e: '10000',
+                        },
+                        {
+                            a: '李成功',
+                            b: '1821503112',
+                            c: '医生合作',
+                            d: '50000',
+                            e: '10000',
+                        }
                     ]
                 };
             }
