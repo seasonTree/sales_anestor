@@ -5,18 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>自主注册设置</title>
+    <title>通知设置</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/vuetify.min.css" rel="stylesheet" />
     <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
-
-    <style>
-        .menuable__content__active{
-            min-width: auto !important;
-        }
-    </style>
 
 </head>
 
@@ -26,10 +20,10 @@
             <div class="header">
                 <v-toolbar>
                     <v-toolbar-side-icon></v-toolbar-side-icon>
-                    <v-toolbar-title>自主注册设置</v-toolbar-title>
+                    <v-toolbar-title>通知设置</v-toolbar-title>
                     <v-spacer></v-spacer>
 
-                    <!-- TODO -->
+                    <!-- todo -->
                     <v-toolbar-items class="hidden-sm-and-down">
                         <v-btn flat>注册</v-btn>
                         <v-btn flat>联系方式</v-btn>
@@ -37,10 +31,9 @@
                 </v-toolbar>
             </div>
 
-
             <v-container class="body" grid-list-md text-xs-center>
                 <div class="body-header">
-                    自主注册设置
+                    通知设置
                 </div>
 
                 <div class="action-bar">
@@ -64,16 +57,12 @@
                                 <td class="text-xs-left">
                                     {{ props.item.c }}
                                 </td>
-                                <td class="text-xs-left">
-                                    {{ props.item.d }}
-                                </td>
-                                <td class="text-xs-center" ref="td5">
-                                    <v-icon v-if="props.item.stop" class="mr-2" color="red" title="停止">
-                                        block
+                                <td class="text-xs-center">
+                                    <v-icon small class="mr-2">
+                                        edit
                                     </v-icon>
-
-                                    <v-icon v-if="!props.item.stop" class="mr-2" color="light-green" title="开始">
-                                        lens
+                                    <v-icon small>
+                                        delete
                                     </v-icon>
                                 </td>
                             </tr>
@@ -90,22 +79,7 @@
                         <v-card-text>
                             <v-form>
                                 <v-select :items="items" label="类型"></v-select>
-                                <div>
-                                    <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
-                                        :return-value.sync="dateFm" lazy transition="scale-transition" offset-y full-width>
-                                        <v-text-field label="开始日期" slot="activator" v-model="dateFm" prepend-icon="event"
-                                            readonly></v-text-field>
-                                        <v-date-picker v-model="dateFm" @input="$refs.menu.save(dateFm)"></v-date-picker>
-                                    </v-menu>
-                                </div>
-                                <div>
-                                    <v-menu ref="menu1" :close-on-content-click="false" v-model="menu1" :nudge-right="40"
-                                        :return-value.sync="dateTo" lazy transition="scale-transition" offset-y full-width>
-                                        <v-text-field label="结束日期" slot="activator" v-model="dateTo" prepend-icon="event"
-                                            readonly></v-text-field>
-                                        <v-date-picker v-model="dateTo"  @input="$refs.menu1.save(dateTo)"></v-date-picker>
-                                    </v-menu>
-                                </div>
+                                <v-textarea label="消息内容" value="消息内容" hint="请输入消息内容"></v-textarea>
                             </v-form>
                         </v-card-text>
 
@@ -122,9 +96,9 @@
                 </v-dialog>
 
             </v-container>
-
         </v-app>
     </div>
+
 
 
     <script src="./js/vue.js"></script>
@@ -135,18 +109,11 @@
 
             data() {
                 return {
-                    // dialog: false,
                     showAdd: false,
 
                     items: [
-                        '开启注册',
-                        '关闭注册'
+                        '佣金变动消息'
                     ],
-
-                    dateFm: null,
-                    dateTo: null,
-                    menu: false,
-                    menu1: false,
 
                     theader: [{
                             text: '',
@@ -155,50 +122,33 @@
                             sortable: false,
                         },
                         {
-                            text: '类型',
+                            text: '消息类型',
                             align: 'left',
                             value: 'b',
                             sortable: false,
                         },
                         {
-                            text: '开始日期',
+                            text: '消息内容',
                             align: 'left',
                             value: 'c',
                             sortable: false,
                         },
                         {
-                            text: '结束日期',
-                            align: 'left',
-                            value: 'd',
-                            sortable: false,
-                        },
-                        {
                             align: 'center',
-                            value: 'h',
+                            value: 'd',
                             sortable: false,
                         },
                     ],
 
                     tdata: [{
-                            a: 1,
-                            b: '开启注册',
-                            c: '2018-2-1',
-                            d: '2099-10-1',
-                            stop: false
-                        },
-                        {
-                            a: 1,
-                            b: '关闭注册',
-                            c: '2018-1-1',
-                            d: '2018-1-30',
-                            stop: true
-                        }
-                    ]
+                        a: 1,
+                        b: '佣金消息',
+                        c: '1322312321231223',
+                    }]
                 }
             }
         });
     </script>
-
 </body>
 
 </html>
