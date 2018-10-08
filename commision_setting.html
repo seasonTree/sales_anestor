@@ -13,7 +13,7 @@
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .commision-row {
+        /* .commision-row {
             max-width: 900px;
             border-bottom: 1px solid #e3e3e3;
             margin: 0 auto;
@@ -22,6 +22,31 @@
         .commision-content {
             min-width: 800px;
             width: 100%;
+        } */
+
+        .ladder {
+            margin: 5px 0;
+        }
+
+        .sub-table thead,
+        .sub-table thead tr,
+        .sub-table thead tr th {
+            visibility: hidden;
+            height: 0 !important;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .sub-hidden {
+            visibility: hidden;
+        }
+
+        .sub-tr:not(:last-of-type) {
+            border-bottom: 1px solid #e3e3e3;
+        }
+
+        .line-middle{
+            margin-top: 1.3em;
         }
     </style>
 
@@ -47,36 +72,161 @@
                     佣金设置
                 </div>
 
-                <v-layout v-resize="onTabelResize">
+                <div class="action-bar">
+                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                        <v-icon dark>add</v-icon>新增设置
+                    </v-btn>
+                </div>
 
-                    <div class="commision-row">
-                        <v-layout row warp justify-center class="commision-content">
-                            <v-flex xs2 class="text-xs-center">
-                                产品/服务
-                            </v-flex>
-                            <v-flex xs2 class="text-xs-center">
-                                奖励方法
-                            </v-flex>
-                            <v-flex xs2 class="text-xs-center">
-                                计算公式
-                            </v-flex>
-                            <v-flex xs2 class="text-xs-center">
-                                佣金梯階
-                            </v-flex>
-                            <v-flex xs2 class="text-xs-center">
-                                数值
-                            </v-flex>
+                <v-data-table :headers="theader" :items="tdata" hide-actions item-key="a" expand class="elevation-1 s-table"
+                    ref="dTable">
+                    <template slot="items" slot-scope="props">
+                        <tr @click="props.expanded = !props.expanded">
+                            <td class="text-xs-left">{{ props.item.a }}</td>
+                            <td class="text-xs-left">{{ props.item.b }}</td>
+                            <td class="text-xs-right">{{ props.item.c }}</td>
 
-                            <template>
+                            <td class="text-xs-center">
+                                <div class="ladder" v-for="(citem, cidx) in props.item.children" :key="cidx">
+                                    {{citem.a}} - {{citem.b}}
+                                </div>
+                            </td>
 
+                            <td class="text-xs-center">
+                                <div class="ladder" v-for="(citem, cidx) in props.item.children" :key="cidx">
+                                    {{citem.c}}
+                                </div>
+                            </td>
+
+                            <td class="text-xs-center">
+                                <v-icon small class="mr-2">
+                                    edit
+                                </v-icon>
+                                <v-icon small>
+                                    delete
+                                </v-icon>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <template slot="expand" slot-scope="props">
+                        <v-data-table :headers="theader" :items="props.item.history" hide-actions item-key="a" expand
+                            class="s-table sub-table" ref="dTable">
+
+                            <template slot="items" slot-scope="sub_props">
+                                <tr class="sub-tr">
+                                    <td class="text-xs-left">{{ sub_props.item.a }}</td>
+                                    <td class="text-xs-left">{{ sub_props.item.b }}</td>
+                                    <td class="text-xs-right">{{ sub_props.item.c }}</td>
+
+                                    <td class="text-xs-center">
+                                        <div class="ladder" v-for="(citem, cidx) in sub_props.item.children" :key="cidx">
+                                            {{citem.a}} - {{citem.b}}
+                                        </div>
+                                    </td>
+
+                                    <td class="text-xs-center">
+                                        <div class="ladder" v-for="(citem, cidx) in sub_props.item.children" :key="cidx">
+                                            {{citem.c}}
+                                        </div>
+                                    </td>
+
+                                    <td class="text-xs-center">
+                                        <div class="sub-hidden">
+                                            <v-icon small class="mr-2">
+                                                stop
+                                            </v-icon>
+                                            <v-icon small>
+                                                stop
+                                            </v-icon>
+                                        </div>
+
+                                    </td>
+                                </tr>
                             </template>
 
-                        </v-layout>
-                    </div>
-                </v-layout>
+                        </v-data-table>
+
+                    </template>
+                </v-data-table>
 
             </v-container>
 
+            <v-dialog scrollable v-model="showAdd" width="600">
+                <v-card>
+                    <v-card-title class="headline grey lighten-2" primary-title>
+                        新增
+                    </v-card-title>
+
+                    <v-card-text>
+                        <v-form>
+                            <v-layout column>
+                                <!-- <v-flex xs6 class="mr-2">
+                                    商品
+                                </v-flex>
+                                <v-flex xs2 class="mr-2">
+                                    类型
+                                </v-flex>
+                                <v-flex xs4 class="ml-2">
+                                    计算方式
+                                </v-flex> -->
+
+                                <v-flex xs12>
+                                    <v-layout>
+                                        <v-flex xs6 class="mr-2">
+                                            <v-select :items="product" label="商品"></v-select>
+                                        </v-flex>
+                                        <v-flex xs2 class="mr-2">
+                                            <v-select :items="method" label="类型"></v-select>
+                                        </v-flex>
+                                        <v-flex xs4 class="ml-2">
+                                            <v-select :items="rule" label="计算方式"></v-select>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+
+                                <v-flex xs12 v-for="(item, index) in edit.step" :key="index">
+                                    <v-layout>
+                                        <v-flex xs4 class="mr-2">
+                                            <v-text-field label="Step Start" type="number" v-model="item.a"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs1 class="mr-2 text-xs-center" align-content-space-between>
+                                            <div class="line-middle">
+                                                ━━
+                                            </div>
+                                        </v-flex>
+                                        <v-flex xs4 class="mr-2">
+                                            <v-text-field label="Step End" type="number" v-model="item.b"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs2 class="ml-2">
+                                            <v-text-field label="Number" type="number" v-model="item.c"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs1 class="mr-2 text-xs-center" align-content-space-between>
+                                            <v-btn fab flat small color="primary" @click="remvoeStep(index)">
+                                                <v-icon>remove</v-icon>
+                                            </v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+                            </v-layout>
+                        </v-form>
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="s-primary" class="ml-0" @click="addStep">
+                            <v-icon left>playlist_add</v-icon>
+                            新增步进
+                        </v-btn>
+                        <v-btn color="s-primary" @click="showAdd = false">
+                            确认
+                        </v-btn>
+                        <v-btn color="primary" flat @click="showAdd = false">
+                            取消
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
 
         </v-app>
     </div>
@@ -87,24 +237,140 @@
         new Vue({
             el: '#app',
 
+            mounted() {
+                for (let i = 0; i < this.tdata.length; i += 1) {
+                    const item = this.tdata[i];
+                    this.$set(this.$refs.dTable.expanded, item.a, false)
+                }
+            },
+
+            methods: {
+                addStep() {
+                    this.edit.step.push({
+                        a: 0,
+                        b: 0,
+                        c: 0
+                    });
+                },
+
+                remvoeStep(index){
+                    this.edit.step.splice(index, 1);
+                }
+            },
+
             data() {
                 return {
+
+                    showAdd: false,
+
                     product: ['20G存储', '医生数量'],
                     method: ['$', '￥', '%'],
                     rule: ['按階计算', '取高计算'],
 
-                    data: [{
+                    edit: {
+                        item: {},
+                        step: [{
+                            a: 10,
+                            b: 10,
+                            c: 30
+                        }],
+                    },
+
+                    theader: [{
+                            text: '商品/服务',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '奖励方法',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '计算公式',
+                            align: 'right',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '佣金阶梯',
+                            align: 'center',
+                            // value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            text: '数值',
+                            align: 'center',
+                            // value: 'e',
+                            sortable: false,
+                        },
+                        {
+                            text: '',
+                            align: 'center',
+                            value: 'f',
+                            sortable: false,
+                        },
+                    ],
+
+                    tdata: [{
                         a: '20G存储',
                         b: '%',
                         c: '按階计算',
                         children: [{
                             a: '100',
                             b: '200',
+                            c: '5%'
+                        }, {
+                            a: '200',
+                            b: '300',
+                            c: '5%'
+                        }, {
+                            a: '400',
+                            b: '500',
+                            c: '5%'
+                        }],
+                        history: [{
+                                a: '20G存储',
+                                b: '%',
+                                c: '按階计算',
+                                children: [{
+                                    a: '100',
+                                    b: '200',
+                                    c: '5%'
+                                }, {
+                                    a: '200',
+                                    b: '300',
+                                    c: '5%'
+                                }, {
+                                    a: '400',
+                                    b: '500',
+                                    c: '5%'
+                                }]
+                            },
+                            {
+                                a: '20G存储',
+                                b: '%',
+                                c: '按階计算',
+                                children: [{
+                                    a: '100',
+                                    b: '200',
+                                    c: '5%'
+                                }, {
+                                    a: '200',
+                                    b: '300',
+                                    c: '5%'
+                                }, {
+                                    a: '400',
+                                    b: '500',
+                                    c: '5%'
+                                }],
+                            }
+                        ],
 
-                        }]
                     }]
-
-                };
+                }
             }
         })
     </script>
