@@ -5,19 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>自主注册设置</title>
+    <title>协议设置</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/vuetify.min.css" rel="stylesheet" />
     <link href="./css/css.css" rel="stylesheet" />
     <link href="./css/common.css" rel="stylesheet" />
+    <!-- <link href="./css/quill.core.css" rel="stylesheet" />
+    <link href="./css/quill.snow.css" rel="stylesheet" />
+    <link href="./css/quill.bubble.css" rel="stylesheet" /> -->
 
     <style>
-        .menuable__content__active{
-            min-width: auto !important;
-        }
-    </style>
+        /* .quill-editor {
+            height: 280px;
+        } */
 
+        /* .quill-editor .ql-container {
+            height: 300px;
+        } */
+
+        .ck-content {
+            height: 400px;
+        }
+
+        /* .content-title{
+            margin-bottom: 10px;
+        } */
+    </style>
 </head>
 
 <body>
@@ -26,10 +40,10 @@
             <div class="header">
                 <v-toolbar>
                     <v-toolbar-side-icon></v-toolbar-side-icon>
-                    <v-toolbar-title>自主注册设置</v-toolbar-title>
+                    <v-toolbar-title>协议设置</v-toolbar-title>
                     <v-spacer></v-spacer>
 
-                    <!-- TODO -->
+                    <!-- todo -->
                     <v-toolbar-items class="hidden-sm-and-down">
                         <v-btn flat>注册</v-btn>
                         <v-btn flat>联系方式</v-btn>
@@ -37,11 +51,12 @@
                 </v-toolbar>
             </div>
 
-
             <v-container class="body" grid-list-md text-xs-center>
                 <div class="body-header">
-                    自主注册设置
+                    协议设置
                 </div>
+
+                <input type="text" placeholder="">
 
                 <div class="action-bar">
                     <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
@@ -64,48 +79,36 @@
                                 <td class="text-xs-left">
                                     {{ props.item.c }}
                                 </td>
-                                <td class="text-xs-left">
-                                    {{ props.item.d }}
-                                </td>
-                                <td class="text-xs-center" ref="td5">
-                                    <v-icon v-if="props.item.stop" class="mr-2" color="red" title="停止">
-                                        block
+                                <td class="text-xs-center">
+                                    <v-icon small class="mr-2">
+                                        edit
                                     </v-icon>
-
-                                    <v-icon v-if="!props.item.stop" class="mr-2" color="light-green" title="开始">
-                                        lens
+                                    <v-icon small>
+                                        delete
                                     </v-icon>
                                 </td>
                             </tr>
                         </template>
                     </v-data-table>
+                    <!-- 
+                    <quill-editor v-model="content" ref="quillEditor" :options="editorOption" @ready="onEditorReady($event)"
+                    @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @change="onEditorChange($event)">
+                </quill-editor> -->
                 </v-layout>
 
-                <v-dialog scrollable v-model="showAdd" width="500">
+                <v-dialog scrollable v-model="showAdd" width="800">
                     <v-card>
                         <v-card-title class="headline grey lighten-2" primary-title>
-                            新增
+                            新增协议
                         </v-card-title>
 
                         <v-card-text>
                             <v-form>
-                                <v-select :items="items" label="类型"></v-select>
-                                <div>
-                                    <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
-                                        :return-value.sync="dateFm" lazy transition="scale-transition" offset-y full-width>
-                                        <v-text-field label="开始日期" slot="activator" v-model="dateFm" prepend-icon="event"
-                                            readonly></v-text-field>
-                                        <v-date-picker v-model="dateFm" @input="$refs.menu.save(dateFm)"></v-date-picker>
-                                    </v-menu>
-                                </div>
-                                <div>
-                                    <v-menu ref="menu1" :close-on-content-click="false" v-model="menu1" :nudge-right="40"
-                                        :return-value.sync="dateTo" lazy transition="scale-transition" offset-y full-width>
-                                        <v-text-field label="结束日期" slot="activator" v-model="dateTo" prepend-icon="event"
-                                            readonly></v-text-field>
-                                        <v-date-picker v-model="dateTo"  @input="$refs.menu1.save(dateTo)"></v-date-picker>
-                                    </v-menu>
-                                </div>
+                                <v-text-field label="协议名称"></v-text-field>
+
+                                <textarea name="content" id="editor" placeholder="协议内容">
+                                </textarea>
+
                             </v-form>
                         </v-card-text>
 
@@ -122,31 +125,46 @@
                 </v-dialog>
 
             </v-container>
-
         </v-app>
     </div>
 
 
+    <!-- <script src="./js/quill.js"></script> -->
     <script src="./js/vue.js"></script>
+    <!-- <script src="./js/vue-quill-editor.js"></script> -->
     <script src="./js/vuetify.js"></script>
+    <script src="./js/ckeditor.js"></script>
     <script>
+        // Vue.use(VueQuillEditor)
+
         new Vue({
             el: '#app',
 
+            mounted() {
+                ClassicEditor
+                    .create(document.querySelector('#editor'), {})
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+
+            // computed: {
+            //     editor() {
+            //         return this.$refs.quillEditor.quill
+            //     },
+            // },
+
             data() {
                 return {
-                    // dialog: false,
+                    content: null,
+                    editorOption: {},
+
                     showAdd: false,
 
                     items: [
                         '开启注册',
                         '关闭注册'
                     ],
-
-                    dateFm: null,
-                    dateTo: null,
-                    menu: false,
-                    menu1: false,
 
                     theader: [{
                             text: '',
@@ -155,21 +173,15 @@
                             sortable: false,
                         },
                         {
-                            text: '类型',
+                            text: '协议名称',
                             align: 'left',
                             value: 'b',
                             sortable: false,
                         },
                         {
-                            text: '开始日期',
+                            text: '协议内容',
                             align: 'left',
                             value: 'c',
-                            sortable: false,
-                        },
-                        {
-                            text: '结束日期',
-                            align: 'left',
-                            value: 'd',
                             sortable: false,
                         },
                         {
@@ -180,25 +192,14 @@
                     ],
 
                     tdata: [{
-                            a: 1,
-                            b: '开启注册',
-                            c: '2018-2-1',
-                            d: '2099-10-1',
-                            stop: false
-                        },
-                        {
-                            a: 1,
-                            b: '关闭注册',
-                            c: '2018-1-1',
-                            d: '2018-1-30',
-                            stop: true
-                        }
-                    ]
+                        a: 1,
+                        b: '佣金协议',
+                        c: '协议内容',
+                    }]
                 }
             }
         });
     </script>
-
 </body>
 
 </html>
