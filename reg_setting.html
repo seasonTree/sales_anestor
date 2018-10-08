@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自主注册设置</title>
+
+    <link href="./css/reset.css" rel="stylesheet" />
+    <link href="./css/vuetify.min.css" rel="stylesheet" />
+    <link href="./css/css.css" rel="stylesheet" />
+    <link href="./css/common.css" rel="stylesheet" />
+
+    <style>
+        .menuable__content__active{
+            min-width: auto !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <div class="header">
+                <v-toolbar>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-toolbar-title>自主注册设置</v-toolbar-title>
+                    <v-spacer></v-spacer>
+
+                    <!-- TODO -->
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat>注册</v-btn>
+                        <v-btn flat>联系方式</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+            </div>
+
+
+            <v-container class="body" grid-list-md text-xs-center>
+                <div class="body-header">
+                    自主注册设置
+                </div>
+
+                <div class="action-bar">
+                    <v-btn color="s-primary" class="ml-0" @click="showAdd = true">
+                        <v-icon dark>add</v-icon>新增渠道
+                    </v-btn>
+                </div>
+
+                <v-layout>
+                    <v-data-table :headers="theader" :items="tdata" hide-actions item-key="a" expand class="elevation-1 s-table"
+                        ref="dTable">
+
+                        <template slot="items" slot-scope="props">
+                            <tr @click="props.expanded = !props.expanded">
+                                <td class="text-xs-left" ref="td1">
+                                    {{ props.item.a }}
+                                </td>
+                                <td class="text-xs-left">
+                                    {{ props.item.b }}
+                                </td>
+                                <td class="text-xs-left">
+                                    {{ props.item.c }}
+                                </td>
+                                <td class="text-xs-left">
+                                    {{ props.item.d }}
+                                </td>
+                                <td class="text-xs-center" ref="td5">
+                                    <v-icon v-if="props.item.stop" class="mr-2" color="red" title="停止">
+                                        block
+                                    </v-icon>
+
+                                    <v-icon v-if="!props.item.stop" class="mr-2" color="light-green" title="开始">
+                                        lens
+                                    </v-icon>
+                                </td>
+                            </tr>
+                        </template>
+                    </v-data-table>
+                </v-layout>
+
+                <v-dialog scrollable v-model="showAdd" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-form>
+                                <v-select :items="items" label="类型"></v-select>
+                                <div>
+                                    <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
+                                        :return-value.sync="dateFm" lazy transition="scale-transition" offset-y full-width>
+                                        <v-text-field label="开始日期" slot="activator" v-model="dateFm" prepend-icon="event"
+                                            readonly></v-text-field>
+                                        <v-date-picker v-model="dateFm" @input="$refs.menu.save(dateFm)"></v-date-picker>
+                                    </v-menu>
+                                </div>
+                                <div>
+                                    <v-menu ref="menu1" :close-on-content-click="false" v-model="menu1" :nudge-right="40"
+                                        :return-value.sync="dateTo" lazy transition="scale-transition" offset-y full-width>
+                                        <v-text-field label="结束日期" slot="activator" v-model="dateTo" prepend-icon="event"
+                                            readonly></v-text-field>
+                                        <v-date-picker v-model="dateTo"  @input="$refs.menu1.save(dateTo)"></v-date-picker>
+                                    </v-menu>
+                                </div>
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAdd = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAdd = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+            </v-container>
+
+        </v-app>
+    </div>
+
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+
+            data() {
+                return {
+                    dialog: false,
+                    showAdd: false,
+
+                    items: [
+                        '开启注册',
+                        '关闭注册'
+                    ],
+
+                    dateFm: null,
+                    dateTo: null,
+                    menu: false,
+                    menu1: false,
+
+                    theader: [{
+                            text: '',
+                            align: 'left',
+                            value: 'a',
+                            sortable: false,
+                        },
+                        {
+                            text: '类型',
+                            align: 'left',
+                            value: 'b',
+                            sortable: false,
+                        },
+                        {
+                            text: '开始日期',
+                            align: 'left',
+                            value: 'c',
+                            sortable: false,
+                        },
+                        {
+                            text: '结束日期',
+                            align: 'left',
+                            value: 'd',
+                            sortable: false,
+                        },
+                        {
+                            align: 'center',
+                            value: 'h',
+                            sortable: false,
+                        },
+                    ],
+
+                    tdata: [{
+                            a: 1,
+                            b: '开启注册',
+                            c: '2018-2-1',
+                            d: '2099-10-1',
+                            stop: false
+                        },
+                        {
+                            a: 1,
+                            b: '关闭注册',
+                            c: '2018-1-1',
+                            d: '2018-1-30',
+                            stop: true
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

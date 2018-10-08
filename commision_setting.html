@@ -13,37 +13,16 @@
     <link href="./css/common.css" rel="stylesheet" />
 
     <style>
-        .upload-container{
-            height: 100%;
-            line-height: 140px;
-            text-align: center;
-            border: 4px dotted #efefef;
-            cursor: pointer;
+        .commision-row {
+            max-width: 900px;
+            border-bottom: 1px solid #e3e3e3;
+            margin: 0 auto;
         }
 
-        .s-primary{
-            margin: 10px 0;
+        .commision-content {
+            min-width: 800px;
             width: 100%;
         }
-
-        .protocol{
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .v-card__text {
-            padding: 6px 6px 6px 56px; 
-            width: 100%;
-            /*height: 50px;*/
-            border-bottom: 1px solid black;
-        }
-        .container.grid-list-md .layout .flex{
-            padding: 0px;
-        }
-        .container.fluid{
-            padding: 0px;
-        }
-
     </style>
 
 </head>
@@ -68,38 +47,37 @@
                     佣金设置
                 </div>
 
-                <v-layout row>
-                  <v-flex xs2 order-lg2 offset-xs1>
-                    <v-card tile flat>
-                      <v-card-text>产品/服务</v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex xs2 order-lg2>
-                    <v-card  tile flat>
-                      <v-card-text>奖励方法</v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex xs2 order-lg2>
-                    <v-card  tile flat>
-                      <v-card-text>计算公式</v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex xs2 order-lg2>
-                    <v-card  tile flat>
-                      <v-card-text>佣金梯階</v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex xs2 order-lg2>
-                    <v-card  tile flat>
-                      <v-card-text>数值</v-card-text>
-                    </v-card>
-                  </v-flex>
+                <v-layout v-resize="onTabelResize">
 
+                    <div class="commision-row">
+                        <v-layout row warp justify-center class="commision-content">
+                            <v-flex xs2 class="text-xs-center">
+                                产品/服务
+                            </v-flex>
+                            <v-flex xs2 class="text-xs-center">
+                                奖励方法
+                            </v-flex>
+                            <v-flex xs2 class="text-xs-center">
+                                计算公式
+                            </v-flex>
+                            <v-flex xs2 class="text-xs-center">
+                                佣金梯階
+                            </v-flex>
+                            <v-flex xs2 class="text-xs-center">
+                                数值
+                            </v-flex>
+
+                            <template>
+
+                            </template>
+
+                        </v-layout>
+                    </div>
                 </v-layout>
 
             </v-container>
 
-            
+
         </v-app>
     </div>
 
@@ -112,63 +90,20 @@
             data() {
                 return {
                     product: ['20G存储', '医生数量'],
-                    method: ['$','￥','%'],
-                    rule: ['按階计算','取高计算'],
-                    theader: [{
-                            text: '产品/服务',
-                            align: 'left',
-                            value: 'a',
-                            sortable: false,
-                        },
-                        {
-                            text: '奖励方法',
-                            align: 'left',
-                            value: 'b',
-                            sortable: false,
-                        },
-                        {
-                            text: '计算公式',
-                            align: 'left',
-                            value: 'c',
-                            sortable: false,
-                        },
-                        {
-                            text: '佣金梯階',
-                            align: 'left',
-                            value: 'd',
-                            sortable: false,
-                        },
-                        {
-                            text: '数值',
-                            align: 'left',
-                            value: 'e',
-                            sortable: false,
-                        },
-                        
-                    ],
-                    tdata: [{
-                            a: '王成',
-                            b: '187563245',
-                            c: '微信1(大众点评)',
-                            d: '50000',
-                            e: '10000',
-                        },
+                    method: ['$', '￥', '%'],
+                    rule: ['按階计算', '取高计算'],
 
-                        {
-                            a: '',
-                            b: '',
-                            c: '微信1(大众点评)',
-                            d: '50000',
-                            e: '10000',
-                        },
-                        {
-                            a: '李成功',
-                            b: '1821503112',
-                            c: '医生合作',
-                            d: '50000',
-                            e: '10000',
-                        }
-                    ]
+                    data: [{
+                        a: '20G存储',
+                        b: '%',
+                        c: '按階计算',
+                        children: [{
+                            a: '100',
+                            b: '200',
+
+                        }]
+                    }]
+
                 };
             }
         })
