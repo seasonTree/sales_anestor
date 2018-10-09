@@ -38,25 +38,20 @@ body {
     border-color: #2196f3 !important;
 }
 
-.theme--light.v-toolbar {
-    color: white;
-    background-color: #42a5f5;
-}
-
-
 .theme--light.application {
     background: inherit;
 }
 
 .theme--light.v-btn {
     color: white;
+    font-size: 16px;
 }
 
-.v-date-picker-table .theme--light.v-btn{
-    color: rgba(0,0,0,.87);
+.v-date-picker-table .theme--light.v-btn {
+    color: rgba(0, 0, 0, .87);
 }
 
-.date-container .v-input__control{
+.date-container .v-input__control {
     max-width: 110px;
 }
 
@@ -69,7 +64,7 @@ body {
     width: 100%;
 }
 
-.ellipsis{
+.ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -77,6 +72,65 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.action-bar{
+.action-bar {
     text-align: left;
 }
+
+/* toolbar */
+
+.theme--light.v-toolbar {
+    color: white;
+    background-color: #42a5f5;
+}
+
+.theme--light.v-toolbar .theme--light.v-btn,
+.toolbar-dropdown .v-list__tile__title,
+.toolbar-subdropdown .v-list__tile__title {
+    font-size: 16px;
+}
+
+.toolbar-dropdown .v-list__tile__action,
+.toolbar-subdropdown .v-list__tile__action{
+    min-width: auto;
+}
+
+.toolbar-dropdown .v-list__tile__title{
+    text-align: right;
+}
+
+.toolbar-subdropdown .v-list__tile__title{
+    text-align: center;
+}
+
+.toolbar-icon {
+    visibility: visible;
+}
+
+.toolbar-img {
+    width: 20vh;
+}
+
+.toolbar-message-tip{
+    margin-top: -4vh;
+}
+
+@media screen and (min-width: 960px) {
+
+    .theme--light.v-toolbar {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .theme--light.v-toolbar .theme--light.v-btn {
+        color: #12afe3;
+    }
+
+    .toolbar-icon {
+        visibility: hidden;
+    }
+
+    .v-toolbar {
+        box-shadow: none;
+    }
+}
+
+/* toolbar */

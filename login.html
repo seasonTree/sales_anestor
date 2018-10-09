@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>登录页面</title>
+
+    <link href="/images/kooa64.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/images/kooa64.ico" rel="apple-touch-icon">
+
+    <title>登录</title>
 
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/vuetify.min.css" rel="stylesheet" />
@@ -26,6 +30,8 @@
             margin: 10px 0;
             width: 100%;
         }
+
+        /* toolbar */
     </style>
 </head>
 
@@ -34,11 +40,40 @@
         <v-app>
             <div class="header">
                 <v-toolbar>
-                    <v-toolbar-side-icon></v-toolbar-side-icon>
-                    <v-toolbar-title>登录页面</v-toolbar-title>
+                    <v-toolbar-side-icon class="toolbar-icon"></v-toolbar-side-icon>
+                    <v-toolbar-title>
+                        <v-img class="toolbar-img" src="./images/kooa_logo.png" contain></v-img>
+                    </v-toolbar-title>
                     <v-spacer></v-spacer>
+
                     <v-toolbar-items class="hidden-sm-and-down">
-                        <v-btn flat>注册</v-btn>
+                        <v-btn href="/login.html" flat>主页</v-btn>
+                    </v-toolbar-items>
+
+                    <v-toolbar-items>
+
+                        <v-menu offset-y>
+                            <v-btn flat primary slot="activator">语言</v-btn>
+                            <v-list dense class="toolbar-dropdown">
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>
+                                        English
+                                    </v-list-tile-title>
+                                </v-list-tile>
+
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>简体中文</v-list-tile-title>
+                                </v-list-tile>
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>繁体中文</v-list-tile-title>
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-toolbar-items>
+
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat href="/person_reg.html">个人注册</v-btn>
+                        <v-btn flat href="/company_reg.html">企业注册</v-btn>
                         <v-btn flat>联系方式</v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
@@ -53,9 +88,10 @@
                     <v-text-field label="用户名"></v-text-field>
                     <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'" :type="show_pass ? 'text' : 'password'"
                         @click:append="show_pass = !show_pass"></v-text-field>
-                    <v-btn class="s-primary">登录</v-btn>
+                    <v-checkbox color="info" hide-details label="Remember me"></v-checkbox>
+                    <v-btn class="s-primary" @click="window.location.href='/team.html'">登录</v-btn>
 
-                    <div>
+                    <div class="text-xs-left">
                         忘记用户名或密码
                         <a href="#">
                             点击找回密码

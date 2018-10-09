@@ -39,11 +39,40 @@
         <v-app>
             <div class="header">
                 <v-toolbar>
-                    <v-toolbar-side-icon></v-toolbar-side-icon>
-                    <v-toolbar-title>公司注册页面</v-toolbar-title>
+                    <v-toolbar-side-icon class="toolbar-icon"></v-toolbar-side-icon>
+                    <v-toolbar-title>
+                        <v-img class="toolbar-img" src="./images/kooa_logo.png" contain></v-img>
+                    </v-toolbar-title>
                     <v-spacer></v-spacer>
+
                     <v-toolbar-items class="hidden-sm-and-down">
-                        <v-btn flat>注册</v-btn>
+                        <v-btn href="/login.html" flat>主页</v-btn>
+                    </v-toolbar-items>
+
+                    <v-toolbar-items>
+
+                        <v-menu offset-y>
+                            <v-btn flat primary slot="activator">语言</v-btn>
+                            <v-list dense class="toolbar-dropdown">
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>
+                                        English
+                                    </v-list-tile-title>
+                                </v-list-tile>
+
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>简体中文</v-list-tile-title>
+                                </v-list-tile>
+                                <v-list-tile @click="">
+                                    <v-list-tile-title>繁体中文</v-list-tile-title>
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-toolbar-items>
+
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn flat href="/person_reg.html">个人注册</v-btn>
+                        <v-btn flat href="/company_reg.html">企业注册</v-btn>
                         <v-btn flat>联系方式</v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
