@@ -575,6 +575,64 @@
                     </v-card>
                 </v-dialog>
 
+                <!-- 编辑资料 -->
+                <v-dialog scrollable v-model="showEdit" width="600">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            编辑资料
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-form>
+
+                                <v-text-field label="用户名"></v-text-field>
+                                <v-text-field label="密码" type="password"></v-text-field>
+                                <v-text-field label="姓"></v-text-field>
+                                <v-text-field label="名字"></v-text-field>
+                                <v-text-field label="公司名称"></v-text-field>
+                                <v-text-field label="银行账号"></v-text-field>
+                                <v-text-field label="开户银行名称"></v-text-field>
+                                <v-text-field label="开户银行地址"></v-text-field>
+                                <v-text-field label="公司地址"></v-text-field>
+                                <v-text-field label="联系人"></v-text-field>
+                                <v-text-field label="联系人手机"></v-text-field>
+                                <v-text-field label="联系人邮箱"></v-text-field>
+
+                                <v-layout row wrap>
+                                    <v-flex xs4>
+                                        <div class="upload-container">
+                                            公司营业执照
+                                        </div>
+                                    </v-flex>
+
+                                    <v-flex xs4>
+                                        <div class="upload-container">
+                                            法人个人照片
+                                        </div>
+                                    </v-flex>
+
+                                    <v-flex xs4>
+                                        <div class="upload-container">
+                                            法人身份证照片
+                                        </div>
+                                    </v-flex>
+                                </v-layout>
+
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showEdit = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showEdit = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
             </v-container>
 
         </v-app>
@@ -628,6 +686,8 @@
 
             data() {
                 return {
+                    showEdit: false,
+
                     subSytle: {
                         paddingLeft: '0px',
                         paddingRight: '0px'
