@@ -103,6 +103,7 @@ body {
 }
 
 .toolbar-icon {
+    /* color: white; */
     visibility: visible;
 }
 
@@ -120,12 +121,12 @@ body {
         background-color: rgba(255, 255, 255, 0.6);
     }
 
-    .theme--light.v-toolbar .theme--light.v-btn {
-        color: #12afe3;
-    }
-
     .toolbar-icon {
         visibility: hidden;
+    }
+
+    .theme--light.v-toolbar .theme--light.v-btn:not(.toolbar-icon) {
+        color: #12afe3;
     }
 
     .v-toolbar {

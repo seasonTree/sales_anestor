@@ -40,14 +40,14 @@
         <v-app>
             <div class="header">
                 <v-toolbar>
-                    <v-toolbar-side-icon class="toolbar-icon"></v-toolbar-side-icon>
+                    <v-toolbar-side-icon class="toolbar-icon" @click="drawer = true"></v-toolbar-side-icon>
                     <v-toolbar-title>
                         <v-img class="toolbar-img" src="./images/kooa_logo.png" contain></v-img>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
 
                     <v-toolbar-items class="hidden-sm-and-down">
-                        <v-btn href="/login.html" flat>主页</v-btn>
+                        <v-btn href="./login.html" flat>主页</v-btn>
                     </v-toolbar-items>
 
                     <v-toolbar-items>
@@ -72,12 +72,30 @@
                     </v-toolbar-items>
 
                     <v-toolbar-items class="hidden-sm-and-down">
-                        <v-btn flat href="/person_reg.html">个人注册</v-btn>
-                        <v-btn flat href="/company_reg.html">企业注册</v-btn>
+                        <v-btn flat href="./person_reg.html">个人注册</v-btn>
+                        <v-btn flat href="./company_reg.html">企业注册</v-btn>
                         <v-btn flat>联系方式</v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
             </div>
+
+            <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
+                <div>
+                    
+                </div>
+
+                <v-list class="pa-1">
+                    <v-list-tile avatar>
+                        <v-list-tile-avatar>
+                            <img src="https://randomuser.me/api/portraits/men/85.jpg">
+                        </v-list-tile-avatar>
+
+                        <v-list-tile-content>
+                            <v-list-tile-title>John Leider</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+            </v-navigation-drawer> -->
 
             <v-container class="body" grid-list-md text-xs-center>
                 <div class="body-header">
@@ -93,7 +111,7 @@
 
                     <div class="text-xs-left">
                         忘记用户名或密码
-                        <a href="/forget_password.html">
+                        <a href="./forget_password.html">
                             点击找回密码
                         </a>
                     </div>
@@ -111,6 +129,7 @@
 
             data() {
                 return {
+                    drawer: false,
                     show_pass: false,
                 }
             }
