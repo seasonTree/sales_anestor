@@ -65,10 +65,6 @@
             width: 100%;
         }
 
-        /* .sub-item:last-of-type .line{
-            display: none;
-        } */
-
         .sub-item div {
             display: inline-block;
         }
@@ -88,6 +84,22 @@
         .sub-right .sub-right-item,
         .sub-left {
             padding: 0 24px;
+        }
+
+
+        .upload-container {
+            height: 100%;
+            line-height: 140px;
+            text-align: center;
+            border: 4px dotted #efefef;
+            cursor: pointer;
+            margin-left: 6px;
+            /* margin-right: 0; */
+        }
+
+        .upload-container:first-of-type {
+            margin-right: 6px;
+            margin-left: 0;
         }
     </style>
 
@@ -501,7 +513,7 @@
                             </v-form>
                         </v-card-text>
 
-                        <v-btn color="s-primary">开通账号</v-btn>
+                        <v-btn color="s-primary" @click="showAddUser = true">开通账号</v-btn>
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -509,6 +521,54 @@
                                 确认
                             </v-btn>
                             <v-btn color="primary" flat @click="showAddSales = false">
+                                取消
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <v-dialog scrollable v-model="showAddUser" width="600">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            新增
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-form>
+                                <v-text-field label="用户名"></v-text-field>
+                                <v-text-field label="密码" :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                                    :type="show_pass ? 'text' : 'password'" @click:append="show_pass = !show_pass"></v-text-field>
+                                <v-text-field label="姓"></v-text-field>
+                                <v-text-field label="名字"></v-text-field>
+                                <v-text-field label="银行账号"></v-text-field>
+                                <v-text-field label="银行名称"></v-text-field>
+                                <v-text-field label="银行地址"></v-text-field>
+                                <v-text-field label="开户名"></v-text-field>
+                                <v-text-field label="固定电话"></v-text-field>
+                                <v-text-field label="移动电话"></v-text-field>
+
+                                <v-layout row wrap>
+                                    <v-flex xs6>
+                                        <div class="upload-container">
+                                            个人照片
+                                        </div>
+                                    </v-flex>
+
+                                    <v-flex xs6>
+                                        <div class="upload-container">
+                                            身份证照片
+                                        </div>
+                                    </v-flex>
+                                </v-layout>
+                            </v-form>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="s-primary" @click="showAddUser = false">
+                                确认
+                            </v-btn>
+                            <v-btn color="primary" flat @click="showAddUser = false">
                                 取消
                             </v-btn>
                         </v-card-actions>
@@ -587,6 +647,9 @@
 
                     showAdd: false,
                     showAddSales: false,
+                    showAddUser: false,
+
+                    show_pass: false,
 
                     saliesLists: [
                         '大大',
